@@ -336,11 +336,6 @@ label > input:focus + span {
   #list-polls {
     grid-template-columns: repeat(2, 1fr);
   }
-
-  .list-item-poll {
-    flex-direction: row;
-    flex-wrap: wrap;
-  }
 }
 
 @media (min-width: 768px) {
