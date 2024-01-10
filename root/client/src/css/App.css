@@ -86,8 +86,14 @@ form {
   flex-wrap: wrap;
 }
 
+#form-create-edit {
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
+
 form > div {
-  width: 50%;
+  width: 100%;
+  /* width: 50%; */
   margin-bottom: 1rem;
   font-size: 1.5rem;
   font-weight: 600;
@@ -99,7 +105,8 @@ form > div:nth-child(3), form > div:nth-child(4) {
 
 label > input {
   display: block;
-  width: 75%;
+  width: 100%;
+  /* width: 75%; */
   padding: .5rem;
   font-size: 1rem;
   font-weight: 400;
@@ -263,6 +270,10 @@ th {
   font-weight: 700;
 }
 
+#table-desktop {
+  display: none;
+}
+
 /* Testing CSS */
 
 #btn-form-submit {
@@ -323,6 +334,25 @@ label > input + span {
   transition: width .5s ease, background-color .5s ease;
 }
 
+#table-mobile-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+#btn-prev-day, #btn-next-day {
+  border: 0;
+}
+
+#table-mobile-currentDay {
+  margin: 0 1rem;
+}
+
+#table-mobile thead tr:first-child > th:last-child {
+  width: 100%;
+}
+
 .hide {
   display: none !important;
 }
@@ -341,6 +371,14 @@ label > input:focus + span {
 @media (min-width: 768px) {
   #list-polls {
     grid-template-columns: repeat(3, 1fr);
+  }
+
+  #table-desktop {
+    display: block;
+  }
+
+  #table-mobile {
+    display: none;
   }
 }
 

@@ -8,6 +8,7 @@ export const Table = ({ pollAvailabilities, setPollAvailabilities, duration, sta
   const [week, setWeek] = useState({});
   const [startDay, setStartDay] = useState(null);
   const [endDay, setEndDay] = useState(null);
+  const [mobileTableDay, setMobileTableDay] = useState(new Date(`${startDate}T12:00:00.000Z`)[Symbol.toPrimitive]('number'));
 
   useEffect(() => {
     if (startDate && endDate) {
@@ -123,11 +124,33 @@ export const Table = ({ pollAvailabilities, setPollAvailabilities, duration, sta
 
   }
 
+  const handlePrevDay = (e) => {
+    e.preventDefault();
+    const previousDay = mobileTableDay - (24 * 60 * 60 * 1000);
+    const startDateNum = new Date(`${startDate}T12:00:00.000Z`)[Symbol.toPrimitive]('number');
+    if (previousDay < startDateNum) {
+      return;
+    } else {
+      setMobileTableDay(previousDay);
+    }
+  }
+
+  const handleNextDay = (e) => {
+    e.preventDefault();
+    const nextDay = mobileTableDay + (24 * 60 * 60 * 1000);
+    const endDateNum = new Date(`${endDate}T12:00:00.000Z`)[Symbol.toPrimitive]('number');
+    if (nextDay > endDateNum) {
+      return;
+    } else {
+      setMobileTableDay(nextDay);
+    }
+  }
+
   const tbody = range(endTime - startTime, startTime).map((hour, idx) => {
     return (
       <tr key={idx}>
         <td>{hour < 12  ? `${hour === 0 ? 12 : hour} A.M.` : `${hour - 12 === 0 ? 12 : hour - 12} P.M.`}</td>
-        <TableRow week={week} hour={hour} duration={duration} setPollAvailabilities={setPollAvailabilities} pollAvailabilities={pollAvailabilities} />
+        <TableRow mobileTableDay={mobileTableDay} week={week} hour={hour} duration={duration} setPollAvailabilities={setPollAvailabilities} pollAvailabilities={pollAvailabilities} />
       </tr>
     );
   });
@@ -142,36 +165,63 @@ export const Table = ({ pollAvailabilities, setPollAvailabilities, duration, sta
     );
   });
 
+  const mobileDay = new Date(mobileTableDay);
   const startDayObj = new Date(startDay);
-  const endDayObj = new Date(endDay); 
+  const endDayObj = new Date(endDay);
+
   return (
     <div id="div-availabilities-table">
-      <div id="table-header">
-        {week && <h2 id="week-current">{startDay && `${DAYABBRIEVATIONS[startDayObj.getDay()]}, ${convertIntToMonth(startDayObj.getMonth())} ${startDayObj.getDate()}, ${startDayObj.getFullYear()}`}{startDay && endDay && ` - `}{endDay && `${DAYABBRIEVATIONS[endDayObj.getDay()]}, ${convertIntToMonth(endDayObj.getMonth())} ${endDayObj.getDate()}, ${endDayObj.getFullYear()}`}</h2>}
-        <div id="table-btns">
-          <ul>
-            <li>
-              <button id="btn-prev-week" onClick={handlePrevWeek}>
-                <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg>
-              </button>
-            </li>
-            <li>
-              <button id="btn-next-week" onClick={handleNextWeek}>
-                <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg>
-              </button>
-            </li>
-          </ul>
+      <div id="table-mobile">
+        <div id="table-mobile-header">
+          <button id="btn-prev-day" onClick={handlePrevDay}>
+            <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg>
+          </button>
+          <div id="table-mobile-currentDay">{mobileDay.toLocaleDateString()}</div>
+          <button id="btn-next-day" onClick={handleNextDay}>
+            <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg>
+          </button>
         </div>
+        <table>
+          <thead>
+            <tr>
+              <th></th>
+              <th>
+                <h3>{DAYABBRIEVATIONS[mobileDay.getDay()]}</h3>
+                <h2>{mobileDay.getUTCDate()}</h2>
+              </th>
+            </tr>
+          </thead>
+          <tbody>{tbody}</tbody>
+        </table>
       </div>
-      <table>
-        <thead>
-          <tr>
-            <th></th>
-            {tHeadRow}
-          </tr>
-        </thead>
-        <tbody>{tbody}</tbody>
-      </table>
+      <div id='table-desktop'>
+        <div id="table-header">
+          {week && <h2 id="week-current">{startDay && `${DAYABBRIEVATIONS[startDayObj.getDay()]}, ${convertIntToMonth(startDayObj.getMonth())} ${startDayObj.getDate()}, ${startDayObj.getFullYear()}`}{startDay && endDay && ` - `}{endDay && `${DAYABBRIEVATIONS[endDayObj.getDay()]}, ${convertIntToMonth(endDayObj.getMonth())} ${endDayObj.getDate()}, ${endDayObj.getFullYear()}`}</h2>}
+          <div id="table-btns">
+            <ul>
+              <li>
+                <button id="btn-prev-week" onClick={handlePrevWeek}>
+                  <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg>
+                </button>
+              </li>
+              <li>
+                <button id="btn-next-week" onClick={handleNextWeek}>
+                  <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg>
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th></th>
+              {tHeadRow}
+            </tr>
+          </thead>
+          <tbody>{tbody}</tbody>
+        </table>
+      </div>
     </div>
   )
 }

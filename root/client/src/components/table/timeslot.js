@@ -2,7 +2,7 @@ import { React, useState, useEffect } from 'react';
 import { classTopPosition, getDbTimestamp, createPossibleTimeBlock } from '../../util/tablehelpers';
 import { TimeBlock } from './timeblock';
 
-export const TimeSlot = ({ week, date, startTime, duration, setPollAvailabilities, pollAvailabilities, hour }) => {
+export const TimeSlot = ({ mobileTableDay, week, date, startTime, duration, setPollAvailabilities, pollAvailabilities, hour }) => {
   const [selected, setSelected] = useState(false);
   useEffect(() => {
     // Check to see if this timeslot with date and starttime is in the poll availabilities in order to become selected.
@@ -19,7 +19,7 @@ export const TimeSlot = ({ week, date, startTime, duration, setPollAvailabilitie
     } else {
       setSelected(false);
     }
-  }, [date, week]);
+  }, [date, week, mobileTableDay]);
 
   const handleMouseenter = (e) => {
     e.preventDefault();

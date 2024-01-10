@@ -11,7 +11,6 @@ export const PollForm = ({ handleSubmit, editData }) => {
   const [pollAvailabilities, setPollAvailabilities] = useState(editData ? editData.availabilities : {});
   const [toggleDays, setToggleDays] = useState(editData && editData.duration === 1440 ? true : false);
 
-  // 2023-12-25
   const [pollStartDate, setPollStartDate] = useState(editData ? editData.startDate : '');
   const [pollEndDate, setPollEndDate] = useState(editData ? editData.endDate : '');
   
@@ -83,7 +82,7 @@ export const PollForm = ({ handleSubmit, editData }) => {
   });
 
   return (
-    <form action={editData ? `/polls/${editData.id}` : '/polls'} onSubmit={(e) => handleFormSubmit(e)}>
+    <form id='form-create-edit' action={editData ? `/polls/${editData.id}` : '/polls'} onSubmit={(e) => handleFormSubmit(e)}>
       <div>
         <label htmlFor='inputName'>Name
           <input id='inputName' name='pollName' type='text' onChange={e => setPollName(e.target.value)} placeholder='John Doe' value={pollName} />
