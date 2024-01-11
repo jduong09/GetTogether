@@ -11,7 +11,6 @@ export const Table = ({ pollAvailabilities, setPollAvailabilities, duration, sta
     if (startDate && endDate) {
       const startDateObject = new Date(`${startDate}T12:00:00.000Z`);
       const endDateObject = new Date(`${endDate}T12:00:00.000Z`);
-      const tableBtnsDiv = document.getElementById('table-btns')
 
       const tableLength = dateDiff(startDateObject, endDateObject) + 1;
       if (tableLength && tableLength > 7) {
@@ -24,7 +23,6 @@ export const Table = ({ pollAvailabilities, setPollAvailabilities, duration, sta
           5: new Date().setTime(startDateObject.getTime() + 1000 * 60 * 60 * 24 * 5),
           6: new Date().setTime(startDateObject.getTime() + 1000 * 60 * 60 * 24 * 6),
         }
-        tableBtnsDiv.classList.remove('hide');
         setWeek(newStateWeek);
       } else {
         const newStateWeek = {};
@@ -33,7 +31,6 @@ export const Table = ({ pollAvailabilities, setPollAvailabilities, duration, sta
           const newDateObject = new Date().setTime(startDateObject.getTime() + 1000 * 60 * 60 * 24 * i);
           newStateWeek[i] = newDateObject;
         }
-        tableBtnsDiv.classList.add('hide');
         setWeek(newStateWeek);
       }
     }
@@ -109,7 +106,6 @@ export const Table = ({ pollAvailabilities, setPollAvailabilities, duration, sta
     if (previousDay < startDateNum) {
       return;
     } else {
-      // move the week array 1 day back, as long as start day works.
       const newWeek = {
         0: previousDay
       }
@@ -138,7 +134,6 @@ export const Table = ({ pollAvailabilities, setPollAvailabilities, duration, sta
       const newWeek = {
         0: nextDay
       };
-      // move the week array 1 day next, as long as end day is the last day of the week.
       for (let i = 1; i < 7; i++) {
         const nextDayWeek = newWeek[0] + (24 * 60 * 60 * 1000 * i);
         if (nextDayWeek > endDateNum) {
@@ -219,38 +214,3 @@ export const Table = ({ pollAvailabilities, setPollAvailabilities, duration, sta
     </div>
   )
 }
-
-/*
-<div id="table-mobile">
-<div id="table-mobile-header">
-          <button id="btn-prev-day" onClick={handlePrevDay}>
-            <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg>
-          </button>
-          <div id="table-mobile-currentDay">{new Date(week[0]).toLocaleDateString()}</div>
-          <button id="btn-next-day" onClick={handleNextDay}>
-            <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg>
-          </button>
-        </div>
-  <div id="table-mobile-header">
-    <button id="btn-prev-day" onClick={handlePrevDay}>
-      <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg>
-    </button>
-    <div id="table-mobile-currentDay">{mobileDay.toLocaleDateString()}</div>
-    <button id="btn-next-day" onClick={handleNextDay}>
-      <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg>
-    </button>
-  </div>
-  <table>
-    <thead>
-      <tr>
-        <th></th>
-        <th>
-          <h3>{DAYABBRIEVATIONS[mobileDay.getDay()]}</h3>
-          <h2>{mobileDay.getUTCDate()}</h2>
-        </th>
-      </tr>
-    </thead>
-    <tbody>{tbody}</tbody>
-  </table>
-</div>
-*/
