@@ -5,7 +5,6 @@ import { apiRequest } from '../../util/api';
 
 export const UpdatePoll = () => {
   const { pollUuid } = useParams();
-  console.log(pollUuid);
   const [editData, setEditData] = useState(null);
 
   useEffect(() => {

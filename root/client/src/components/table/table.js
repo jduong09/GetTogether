@@ -6,9 +6,6 @@ const DAYABBRIEVATIONS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 
 export const Table = ({ pollAvailabilities, setPollAvailabilities, duration, startDate, endDate, startTime, endTime }) => {
   const [week, setWeek] = useState({});
-  const [startDay, setStartDay] = useState(null);
-  const [endDay, setEndDay] = useState(null);
-  const [mobileTableDay, setMobileTableDay] = useState(new Date(`${startDate}T12:00:00.000Z`)[Symbol.toPrimitive]('number'));
 
   useEffect(() => {
     if (startDate && endDate) {
@@ -29,23 +26,15 @@ export const Table = ({ pollAvailabilities, setPollAvailabilities, duration, sta
         }
         tableBtnsDiv.classList.remove('hide');
         setWeek(newStateWeek);
-        setStartDay(startDateObject[Symbol.toPrimitive]('number'));
-        setEndDay(new Date().setTime(startDateObject.getTime() + 1000 * 60 * 60 * 24 * 6));
       } else {
         const newStateWeek = {};
         newStateWeek[0] = startDateObject[Symbol.toPrimitive]('number');
-        let lastDay;
         for (let i = 1; i < tableLength; i++) {
           const newDateObject = new Date().setTime(startDateObject.getTime() + 1000 * 60 * 60 * 24 * i);
-          if (i === tableLength - 1) {
-            lastDay = newDateObject;
-          }
           newStateWeek[i] = newDateObject;
         }
         tableBtnsDiv.classList.add('hide');
         setWeek(newStateWeek);
-        setStartDay(startDateObject[Symbol.toPrimitive]('number'));
-        setEndDay(lastDay);
       }
     }
   }, [startDate, endDate]);
@@ -65,8 +54,6 @@ export const Table = ({ pollAvailabilities, setPollAvailabilities, duration, sta
         6: new Date().setTime(startDateObject.getTime() + 1000 * 60 * 60 * 24 * 6),
       }
       setWeek(newStateWeek);
-      setStartDay(startDateObject[Symbol.toPrimitive]('number'));
-      setEndDay(new Date().setTime(startDateObject.getTime() + 1000 * 60 * 60 * 24 * 6));
     } else {
       const newStartWeek = new Date(sevenDaysFromStart);
       const newStateWeek = {
@@ -79,8 +66,6 @@ export const Table = ({ pollAvailabilities, setPollAvailabilities, duration, sta
         6: new Date().setTime(newStartWeek.getTime() + 1000 * 60 * 60 * 24 * 6),
       }
       setWeek(newStateWeek);
-      setStartDay(newStartWeek[Symbol.toPrimitive]('number'));
-      setEndDay(new Date().setTime(newStartWeek.getTime() + 1000 * 60 * 60 * 24 * 6));
     }
   }
 
@@ -95,17 +80,11 @@ export const Table = ({ pollAvailabilities, setPollAvailabilities, duration, sta
     if (sevenDaysForward > endDateObject[Symbol.toPrimitive]('number')) {
       const numDaysInNewWeek = Math.round((endDateObject - week[6]) / (24 * 60 * 60 * 1000));
       const newStateWeek = {};
-      let firstDay;
       for (let i = 0; i < numDaysInNewWeek - 1; i++) {
-        if (i === 0) {
-          firstDay = new Date().setTime(endDateObject.getTime() - ((numDaysInNewWeek - i - 1) * 1000 * 60 * 60 * 24));
-        }
         newStateWeek[i] = new Date().setTime(endDateObject.getTime() - (numDaysInNewWeek - i - 1) * 1000 * 60 * 60 * 24);
       }
       newStateWeek[numDaysInNewWeek - 1] = endDateObject[Symbol.toPrimitive]('number');
       setWeek(newStateWeek);
-      setStartDay(firstDay);
-      setEndDay(endDateObject[Symbol.toPrimitive]('number'));
     } else {
       const nextDayOfWeek = new Date(week[6] + (24 * 60 * 60 * 1000));
       const newStateWeek = {
@@ -118,31 +97,57 @@ export const Table = ({ pollAvailabilities, setPollAvailabilities, duration, sta
         6: new Date().setTime(nextDayOfWeek.getTime() + 1000 * 60 * 60 * 24 * 6),
       }
       setWeek(newStateWeek);
-      setStartDay(nextDayOfWeek[Symbol.toPrimitive]('number'));
-      setEndDay(new Date().setTime(nextDayOfWeek.getTime() + 1000 * 60 * 60 * 24 * 6));
     }
 
   }
 
   const handlePrevDay = (e) => {
     e.preventDefault();
-    const previousDay = mobileTableDay - (24 * 60 * 60 * 1000);
+    const previousDay = week[0] - (24 * 60 * 60 * 1000);
     const startDateNum = new Date(`${startDate}T12:00:00.000Z`)[Symbol.toPrimitive]('number');
+
     if (previousDay < startDateNum) {
       return;
     } else {
-      setMobileTableDay(previousDay);
+      // move the week array 1 day back, as long as start day works.
+      const newWeek = {
+        0: previousDay
+      }
+
+      const endDateNum = new Date(`${endDate}T12:00:00.000Z`)[Symbol.toPrimitive]('number');
+      for (let i = 1; i < 7; i++) {
+        const nextDayWeek = newWeek[0] + (24 * 60 * 60 * 1000 * i);
+        if (nextDayWeek > endDateNum) {
+          break;
+        } else {
+          newWeek[i] = nextDayWeek;
+        }
+      }
+      setWeek(newWeek);
     }
   }
 
   const handleNextDay = (e) => {
     e.preventDefault();
-    const nextDay = mobileTableDay + (24 * 60 * 60 * 1000);
+    
+    const nextDay = week[0] + (24 * 60 * 60 * 1000);
     const endDateNum = new Date(`${endDate}T12:00:00.000Z`)[Symbol.toPrimitive]('number');
     if (nextDay > endDateNum) {
       return;
     } else {
-      setMobileTableDay(nextDay);
+      const newWeek = {
+        0: nextDay
+      };
+      // move the week array 1 day next, as long as end day is the last day of the week.
+      for (let i = 1; i < 7; i++) {
+        const nextDayWeek = newWeek[0] + (24 * 60 * 60 * 1000 * i);
+        if (nextDayWeek > endDateNum) {
+          break;
+        } else {
+          newWeek[i] = nextDayWeek;
+        }
+      }
+      setWeek(newWeek);
     }
   }
 
@@ -150,7 +155,7 @@ export const Table = ({ pollAvailabilities, setPollAvailabilities, duration, sta
     return (
       <tr key={idx}>
         <td>{hour < 12  ? `${hour === 0 ? 12 : hour} A.M.` : `${hour - 12 === 0 ? 12 : hour - 12} P.M.`}</td>
-        <TableRow mobileTableDay={mobileTableDay} week={week} hour={hour} duration={duration} setPollAvailabilities={setPollAvailabilities} pollAvailabilities={pollAvailabilities} />
+        <TableRow week={week} hour={hour} duration={duration} setPollAvailabilities={setPollAvailabilities} pollAvailabilities={pollAvailabilities} />
       </tr>
     );
   });
@@ -165,48 +170,37 @@ export const Table = ({ pollAvailabilities, setPollAvailabilities, duration, sta
     );
   });
 
-  const mobileDay = new Date(mobileTableDay);
-  const startDayObj = new Date(startDay);
-  const endDayObj = new Date(endDay);
+  const startDayObj = new Date(week[0]);
+  const endDayObj = new Date(week[Object.keys(week).length - 1]);
 
   return (
     <div id="div-availabilities-table">
-      <div id="table-mobile">
-        <div id="table-mobile-header">
-          <button id="btn-prev-day" onClick={handlePrevDay}>
-            <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg>
-          </button>
-          <div id="table-mobile-currentDay">{mobileDay.toLocaleDateString()}</div>
-          <button id="btn-next-day" onClick={handleNextDay}>
-            <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg>
-          </button>
-        </div>
-        <table>
-          <thead>
-            <tr>
-              <th></th>
-              <th>
-                <h3>{DAYABBRIEVATIONS[mobileDay.getDay()]}</h3>
-                <h2>{mobileDay.getUTCDate()}</h2>
-              </th>
-            </tr>
-          </thead>
-          <tbody>{tbody}</tbody>
-        </table>
-      </div>
       <div id='table-desktop'>
         <div id="table-header">
-          {week && <h2 id="week-current">{startDay && `${DAYABBRIEVATIONS[startDayObj.getDay()]}, ${convertIntToMonth(startDayObj.getMonth())} ${startDayObj.getDate()}, ${startDayObj.getFullYear()}`}{startDay && endDay && ` - `}{endDay && `${DAYABBRIEVATIONS[endDayObj.getDay()]}, ${convertIntToMonth(endDayObj.getMonth())} ${endDayObj.getDate()}, ${endDayObj.getFullYear()}`}</h2>}
+          {week && <h2 id="week-current">{week[0] && `${DAYABBRIEVATIONS[startDayObj.getDay()]}, ${convertIntToMonth(startDayObj.getMonth())} ${startDayObj.getDate()}, ${startDayObj.getFullYear()}`}{startDayObj.getTime() !== endDayObj.getTime() && ` - `}{startDayObj.getTime() !== endDayObj.getTime() && `${DAYABBRIEVATIONS[endDayObj.getDay()]}, ${convertIntToMonth(endDayObj.getMonth())} ${endDayObj.getDate()}, ${endDayObj.getFullYear()}`}</h2>}
           <div id="table-btns">
             <ul>
               <li>
                 <button id="btn-prev-week" onClick={handlePrevWeek}>
+                  <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512"><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160zm352-160l-160 160c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L301.3 256 438.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0z"/></svg>
+                </button>
+              </li>
+              <li>
+                <button id="btn-prev-day" onClick={handlePrevDay}>
                   <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg>
                 </button>
               </li>
               <li>
-                <button id="btn-next-week" onClick={handleNextWeek}>
+                <div id="table-mobile-currentDay">{new Date(week[0]).toLocaleDateString()}</div>
+              </li>
+              <li>
+                <button id="btn-next-day" onClick={handleNextDay}>
                   <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg>
+                </button>
+              </li>
+              <li>
+                <button id="btn-next-week" onClick={handleNextWeek}>
+                  <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512"><path d="M470.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 256 265.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160zm-352 160l160-160c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L210.7 256 73.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0z"/></svg>
                 </button>
               </li>
             </ul>
@@ -225,3 +219,38 @@ export const Table = ({ pollAvailabilities, setPollAvailabilities, duration, sta
     </div>
   )
 }
+
+/*
+<div id="table-mobile">
+<div id="table-mobile-header">
+          <button id="btn-prev-day" onClick={handlePrevDay}>
+            <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg>
+          </button>
+          <div id="table-mobile-currentDay">{new Date(week[0]).toLocaleDateString()}</div>
+          <button id="btn-next-day" onClick={handleNextDay}>
+            <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg>
+          </button>
+        </div>
+  <div id="table-mobile-header">
+    <button id="btn-prev-day" onClick={handlePrevDay}>
+      <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg>
+    </button>
+    <div id="table-mobile-currentDay">{mobileDay.toLocaleDateString()}</div>
+    <button id="btn-next-day" onClick={handleNextDay}>
+      <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg>
+    </button>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th></th>
+        <th>
+          <h3>{DAYABBRIEVATIONS[mobileDay.getDay()]}</h3>
+          <h2>{mobileDay.getUTCDate()}</h2>
+        </th>
+      </tr>
+    </thead>
+    <tbody>{tbody}</tbody>
+  </table>
+</div>
+*/

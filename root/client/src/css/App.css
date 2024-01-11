@@ -270,8 +270,13 @@ th {
   font-weight: 700;
 }
 
-#table-desktop {
+
+#table-desktop thead th, #table-desktop  tbody tr td {
   display: none;
+}
+
+#table-desktop thead th:first-child, #table-desktop thead th:nth-child(2), #table-desktop  tbody tr td:first-child, #table-desktop  tbody tr td:nth-child(2) {
+  display: table-cell;
 }
 
 /* Testing CSS */
@@ -373,12 +378,12 @@ label > input:focus + span {
     grid-template-columns: repeat(3, 1fr);
   }
 
-  #table-desktop {
-    display: block;
-  }
-
   #table-mobile {
     display: none;
+  }
+
+  #table-desktop thead th:nth-child(3), #table-desktop thead th:nth-child(4), #table-desktop  tbody tr td:nth-child(3), #table-desktop  tbody tr td:nth-child(4) {
+    display: table-cell;
   }
 }
 
@@ -391,5 +396,9 @@ label > input:focus + span {
 @media (min-width: 1200px) {
   #list-polls {
     grid-template-columns: repeat(5, 1fr);
+  }
+
+  #table-desktop thead th, #table-desktop  tbody tr td {
+    display: table-cell;
   }
 }
