@@ -1,7 +1,7 @@
 import { React } from 'react';
 import { PollForm } from '../poll/pollForm';
 import { apiRequest } from '../../util/api';
-
+import '../../css/form.css';
 
 export const NewPoll = () => {
   const handleSubmit = async (e, formData, action, method) => {

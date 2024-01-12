@@ -2,6 +2,7 @@ import { React, useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { PollForm } from '../poll/pollForm';
 import { apiRequest } from '../../util/api';
+import '../../css/form.css';
 
 export const UpdatePoll = () => {
   const { pollUuid } = useParams();
