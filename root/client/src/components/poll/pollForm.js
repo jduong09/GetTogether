@@ -114,12 +114,12 @@ export const PollForm = ({ handleSubmit, editData }) => {
             <input id='inputEndDate' name='pollEndDate' type='date' onChange={e => { setPollEndDate(e.target.value) }} value={pollEndDate} />
           </label>
         </div>}
-      {pollStartDate && pollEndDate &&
+      {!toggleDays &&
         <div id='div-select-times'>
-          <label className='label-select-time' htmlFor='selectStartTime'>Start Time:
+          <label className='label-select-time' htmlFor='selectStartTime'>Start Time
             <select id='selectStartTime' onChange={(e) => setPollStartTime(parseInt(e.target.value))} value={pollStartTime} >{listStartOptions}</select>
           </label>
-          <label className='label-select-time' htmlFor='selectEndTime'>End Time:
+          <label className='label-select-time' htmlFor='selectEndTime'>End Time
             <select id='selectEndTime' onChange={(e) => setPollEndTime(parseInt(e.target.value))} value={pollEndTime} >{listEndOptions}</select>
           </label>
         </div>}

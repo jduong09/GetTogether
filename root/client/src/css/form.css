@@ -19,7 +19,7 @@ label {
   position: relative;
 }
 
-label > input {
+label > input, label > select {
   display: block;
   width: 100%;
   padding: .5rem;
@@ -72,17 +72,11 @@ label > input:focus + span {
 
 #div-select-times {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
 }
 
-.label-select-time {
-  display: flex;
-  align-items: center;
-}
-
-.label-select-time > select {
-  margin-left: .5rem;
+.label-select-time:first-child {
+  margin-bottom: 1rem;
 }
 
 #inputAvailabilities {
@@ -137,20 +131,6 @@ form > label:last-of-type, #div-availabilities-table, table, thead, tr {
   display: flex;
 }
 
-#monthlyTable-header {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-}
-
-#monthlyTable-header > h2, #week-current {
-  background-color: #89CFF0;
-}
-
-#btn-prev-month, #btn-next-month, #monthlyTable-header > h2, #week-current {
-  padding: .5rem 1rem;
-}
-
 #btn-toggle-times:hover, #btn-toggle-days:hover {
   background-color: #89CFF0;
 }
@@ -188,6 +168,7 @@ form > label:last-of-type, #div-availabilities-table, table, thead, tr {
     align-items: center;
     flex-wrap: wrap;
   }
+
   form > div, #div-duration {
     width: 45%;
   }
@@ -195,4 +176,25 @@ form > label:last-of-type, #div-availabilities-table, table, thead, tr {
   form > div:nth-child(3), form > div:nth-child(4) {
     margin-bottom: 0;
   }
+
+  #div-select-times {
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .label-select-time {
+    display: flex;
+    align-items: center;
+  }
+
+  .label-select-time:first-child {
+    margin-bottom: 0;
+  }
+
+  .label-select-time > select {
+    width: fit-content;
+    margin-left: 1rem;
+  }  
 }
