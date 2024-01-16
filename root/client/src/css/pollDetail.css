@@ -1,3 +1,28 @@
+/* Header */
+#list-desktop {
+  display: none;
+}
+
+#list-mobile {
+  display: flex;
+  align-items: center;
+}
+
+#btn-admin-mobile-edit, #btn-admin-mobile-delete {
+  width: 100%;
+  border: 0;
+  padding: 0;
+}
+
+#btn-admin-mobile-delete {
+  margin-left: 1rem;
+}
+
+#btn-admin-update {
+  margin-bottom: .25rem;
+}
+
+/* Main */
 #ul-poll-description > li > svg {
   margin-right: .5rem;
 }
@@ -61,10 +86,6 @@
   border-color: #89CFF0;
 }
 
-#form-response {
-  display: flex;
-}
-
 #form-response > label {
   width: 100%;
   display: flex;
@@ -101,12 +122,12 @@
   }
 
   #form-response > label:last-of-type {
-    width: 25%;
-    margin-right: 1rem;
+    width: calc(50% - .5rem);
   }
 
   #btn-submit {
     width: fit-content;
+    padding: .5rem;
   }
 }
 
@@ -114,16 +135,36 @@
   #ul-availabilities {
     grid-template-columns: repeat(3, 1fr);
   }
+
+  #form-response > label:last-of-type {
+    width: calc(33% - .5rem);
+  }
+
+  #list-desktop {
+    display: block;
+  }
+
+  #list-mobile {
+    display: none;
+  }
 }
 
 @media (min-width: 992px) {
   #ul-availabilities {
     grid-template-columns: repeat(4, 1fr);
   }
+
+  #form-response > label:last-of-type {
+    width: calc(25% - 11.7px);
+  }
 }
 
 @media (min-width: 1200px) {
   #ul-availabilities {
     grid-template-columns: repeat(5, 1fr);
+  }
+
+  #form-response > label:last-of-type {
+    width: calc(20% - 12px)
   }
 }

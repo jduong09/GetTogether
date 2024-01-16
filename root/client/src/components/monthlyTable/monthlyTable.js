@@ -17,14 +17,15 @@ export const MonthlyTable = ({ pollAvailabilities, setPollAvailabilities }) => {
     const numSinceFirst = dayOfMonth - 1;
 
     const numAdj = dayOfWeek + numSinceFirst > 7 ? numSinceFirst % 7 : 7 % numSinceFirst;
-
     let firstDayOfWeek;
-    if (numAdj + dayOfWeek > 6) {
-      firstDayOfWeek = dayOfWeek - numAdj;
+    
+    if (numAdj === 0) {
+      firstDayOfWeek = dayOfWeek - numSinceFirst;
+    } else if (numAdj > dayOfWeek) {
+      firstDayOfWeek = dayOfWeek + 7 - numAdj;
     } else {
-      firstDayOfWeek = numAdj + dayOfWeek;
+      firstDayOfWeek = dayOfWeek - numAdj;
     }
-
     setFirstDayOfMonth(findDayOfWeek(firstDayOfWeek))
 
     const todaysMonth = todaysDate.getMonth();

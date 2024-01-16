@@ -23,24 +23,16 @@ header > h2 {
   font-size: 2rem;
 }
 
-#svg-logo, #svg-description, #svg-location {
+#svg-logo, #svg-description, #svg-location, #svg-edit, #svg-delete {
   fill: #FFFFFF;
 }
 
-#btn-poll-create, #btn-admin-update, #btn-admin-create {
+#btn-poll-create, #btn-admin-update, #btn-admin-delete {
   background-color: #FFFFFF;
   border-color: #FFFFFF;
 }
 
-#btn-admin-update, #btn-admin-create {
-  width: 100%;
-}
-
-#btn-admin-update {
-  margin-bottom: .25rem;
-}
-
-#btn-poll-create:hover, #btn-admin-update:hover, #btn-admin-create:hover {
+#btn-poll-create:hover, #btn-admin-update:hover, #btn-admin-delete:hover {
   background-color: #5CBDEA;
   border-color: #5CBDEA;
 }
