@@ -6,9 +6,9 @@ import { LandingPage } from './components/landingPage';
 import { Dashboard } from './components/user/dashboard';
 import { NewPoll } from './components/user/newPoll';
 import { UpdatePoll } from './components/user/updatePoll';
-import { PollDetail } from './components/poll/pollDetail';
-import { PollDetailAdmin } from './components/poll/pollDetailAdmin';
-import { PollCheckout } from './components/poll/pollCheckout';
+import { ResponsePage } from './components/poll/responsePage';
+import { AdminPage } from './components/poll/adminPage';
+import { CheckoutPage } from './components/poll/checkoutPage';
 
 function App() {
   return (
@@ -17,10 +17,10 @@ function App() {
         <Routes>
           <Route path='/' element={<Dashboard />} />
           <Route path='/polls/new' element={<NewPoll />} />
-          <Route path='/polls/:pollUuid' element={<PollDetail />} />
+          <Route path='/polls/:pollUuid' element={<ResponsePage />} />
           <Route path='/polls/:pollUuid/update' element={<UpdatePoll />} />
-          <Route path='/admin/:pollUuid' element={<PollDetailAdmin />} />
-          <Route path='/polls/:pollUuid/checkout' element={<PollCheckout />} />
+          <Route path='/admin/:pollUuid' element={<AdminPage />} />
+          <Route path='/polls/:pollUuid/checkout' element={<CheckoutPage />} />
         </Routes>
       </BrowserRouter>
     </div>

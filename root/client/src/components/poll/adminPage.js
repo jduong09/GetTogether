@@ -1,9 +1,9 @@
-import '../../css/pollDetail.css';
+import '../../css/response_admin.css';
 import { React, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { ResultsList } from './resultsList'
 
-export const PollDetailAdmin = () => {
+export const AdminPage = () => {
   const { pollUuid } = useParams();
   const [pollData, setPollData] = useState('');
   

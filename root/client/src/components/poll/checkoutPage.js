@@ -2,7 +2,7 @@ import { React, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import '../../css/checkout.css';
 
-export const PollCheckout = () => {
+export const CheckoutPage = () => {
   const { pollUuid } = useParams();
   const [pollData, setPollData] = useState(null);
   useEffect(() => {
