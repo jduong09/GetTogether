@@ -17,7 +17,7 @@ header > h1 {
 }
 
 header > h1 > span {
-  display: none;
+  color: #FFFFFF;
   margin-left: .5rem;
 }
 
