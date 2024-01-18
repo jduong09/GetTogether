@@ -1,21 +1,63 @@
 /* Header */
-#list-desktop {
+header {
+  position: relative;
+}
+
+#header-desktop-poll-btns {
   display: none;
 }
 
-#list-mobile {
-  display: flex;
-  align-items: center;
-}
-
-#btn-admin-mobile-edit, #btn-admin-mobile-delete {
-  width: 100%;
+#btn-mobile-open, #btn-mobile-close {
   border: 0;
   padding: 0;
 }
 
-#btn-admin-mobile-delete {
-  margin-left: 1rem;
+#btn-mobile-open:hover > svg > path, #btn-mobile-close:hover > svg > path {
+  fill: #000000;
+}
+
+#ul-desktop-poll-btns {
+  display: flex;
+  align-content: center;
+}
+
+#ul-mobile-poll-description, #ul-mobile-admin-description {
+  position: absolute;
+  top: 5rem;
+  left: 0;
+  width: 100%;
+  background-color: #89CFF0;
+  padding: 2rem;
+  z-index: 5;
+  box-shadow: 0 4px 2px -2px rgba(0, 0, 0, 0.08);
+}
+
+#ul-mobile-admin-description {
+  display: flex;
+  flex-direction: column;
+}
+
+#ul-mobile-admin-description > li {
+  margin-bottom: 1rem;
+}
+
+#ul-mobile-poll-description > li:last-of-type {
+  margin-bottom: 0;
+}
+
+#ul-mobile-poll-description > li > svg {
+  margin-right: .5rem;
+}
+
+#btn-admin-mobile-edit, #btn-admin-mobile-delete {
+  width: 100%;
+  padding: .5rem;
+  border: 2px solid #FFFFFF;
+  background-color: #FFFFFF;
+}
+
+#btn-admin-mobile-edit {
+  margin-bottom: 1rem;
 }
 
 #btn-admin-update {
@@ -23,6 +65,11 @@
 }
 
 /* Main */
+#div-description {
+  display: none;
+  margin-bottom: 1rem;
+}
+
 #ul-poll-description > li > svg {
   margin-right: .5rem;
 }
@@ -113,6 +160,10 @@
 }
 
 @media (min-width: 576px) {
+  #ul-mobile-poll-description {
+    bottom: -6rem;
+  }
+  
   #ul-availabilities {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -132,6 +183,30 @@
 }
 
 @media (min-width: 768px) {
+  header > h2 {
+    margin: 0 auto;
+  }
+
+  #header-desktop-poll-btns {
+    display: block;
+  }
+
+  #header-poll-btns {
+    display: none;
+  }
+
+  #btn-admin-mobile-edit, #btn-admin-mobile-delete {
+    padding: .5rem 1rem;
+  }
+
+  #btn-admin-mobile-delete {
+    margin-left: 1rem;
+  }
+
+  #svg-description > path, #svg-location > path {
+    fill: #89CFF0;
+  }
+
   #ul-availabilities {
     grid-template-columns: repeat(3, 1fr);
   }
@@ -140,11 +215,11 @@
     width: calc(33% - .5rem);
   }
 
-  #list-desktop {
+  #div-description {
     display: block;
   }
 
-  #list-mobile {
+  #header-mobile-description {
     display: none;
   }
 }

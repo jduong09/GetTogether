@@ -32,7 +32,7 @@ header > h2 {
   border-color: #FFFFFF;
 }
 
-#btn-poll-create:hover, #btn-admin-update:hover, #btn-admin-delete:hover {
+#btn-poll-create:hover, #btn-admin-mobile-edit:hover, #btn-admin-mobile-delete:hover  {
   background-color: #5CBDEA;
   border-color: #5CBDEA;
 }
