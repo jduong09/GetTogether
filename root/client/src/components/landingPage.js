@@ -38,7 +38,7 @@ export const LandingPage = () => {
             </li>
             <li>
               <h2>Find the ideal meeting time</h2>
-              <div>Insert admin page.</div>
+              <img id='img-admin' src='/admin_page.png' alt='UI for seeing results' />
             </li>
           </ul>
         </div>
