@@ -11,6 +11,16 @@ header {
   background-color: #89CFF0;
 }
 
+header > h1 {
+  display: flex;
+  align-items: center;
+}
+
+header > h1 > span {
+  display: none;
+  margin-left: .5rem;
+}
+
 button {
   cursor: pointer;
 }
@@ -131,6 +141,10 @@ button:hover {
 }
 
 @media (min-width: 768px) {
+  header > h1 > span {
+    display: inline;
+  }
+
   #list-polls {
     grid-template-columns: repeat(3, 1fr);
   }

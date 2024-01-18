@@ -15,7 +15,7 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path='/' element={<Dashboard />} />
+          <Route path='/' element={<LandingPage />} />
           <Route path='/polls/new' element={<NewPoll />} />
           <Route path='/polls/:pollUuid' element={<ResponsePage />} />
           <Route path='/polls/:pollUuid/update' element={<UpdatePoll />} />
