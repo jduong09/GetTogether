@@ -16,6 +16,7 @@ header > h2 {
   display: block;
   width: 100%;
   height: auto;
+  margin: 0 auto;
 }
 
 main h1 {
@@ -25,6 +26,7 @@ main h1 {
 
 #div-hero {
   margin-bottom: 2rem;
+  text-align: center;
 }
 
 #div-hero > div > span {
@@ -32,14 +34,33 @@ main h1 {
   margin-bottom: .5rem;
 }
 
-#img-form, #img-response, #img-admin {
+#img-create, #img-response, #img-admin {
   display: block;
   width: auto;
   height: 300px;
+  margin: 0 auto;
+}
+
+#img-response, #img-admin {
+  display: none;
 }
 
 #div-steps {
+  display: flex;
+  align-items: center;
   margin-bottom: 2rem;
+}
+
+#btn-prev-step, #btn-next-step {
+  border: 0;
+}
+
+#btn-prev-step {
+  margin-right: .5rem;
+}
+
+#btn-next-step {
+  margin-left: .5rem;
 }
 
 #list-workflow-steps {
@@ -55,10 +76,74 @@ main h1 {
 #list-workflow-steps > li > h2 {
   font-size: 1.25rem;
   margin-bottom: .5rem;
+  text-decoration: underline;
+}
+
+@media (min-width: 576px) {
+  #img-hero {
+    width: 85%;
+  }
 }
 
 @media (min-width: 767px) {
   header > h2 {
     display: block;
+  }
+
+  #img-hero {
+    width: 65%;
+  }
+
+  #btn-prev-step, #btn-next-step {
+    display: none;
+  }
+
+  #img-create, #img-response, #img-admin {
+    display: block;
+  }
+
+  #list-workflow-steps > li {
+    margin-bottom: 2rem;
+  }
+
+  #list-workflow-steps > li > h2 {
+    margin-bottom: 1rem;
+  }
+}
+
+@media (min-width: 922px) {
+  #div-hero {
+    display: flex;
+    align-items: center;
+    text-align: start;
+    margin-bottom: 4rem;
+  }
+
+  #img-hero {
+    width: 50%;
+    order: 2;
+  }
+
+  #div-hero > div {
+    order: 1;
+  }
+
+  #div-hero > div > h1 {
+    font-size: 3rem;
+    width: 80%;
+  }
+
+  #div-hero > div > span {
+    width: 75%;
+  }
+
+  #list-workflow-steps {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  #list-workflow-steps > li {
+    width: 33%;
   }
 }
