@@ -68,15 +68,15 @@ export const LandingPage = () => {
           <ul id='list-workflow-steps'>
             <li ref={listStep1}>
               <h2>Fill out the form</h2>
-              <img id='img-form' src='/create_form.png' alt='UI for creating poll.' />
+              <img id='img-form' src='/mobile_create.png' alt='UI for creating poll.' />
             </li>
             <li ref={listStep2} className='hide'>
               <h2>Have peers respond</h2>
-              <img id='img-response' src='/respond_form.png' alt='UI for responding to poll' />
+              <img id='img-response' src='/mobile_response.png' alt='UI for responding to poll' />
             </li>
             <li ref={listStep3} className='hide'>
               <h2>Find the ideal meeting time</h2>
-              <img id='img-admin' src='/admin_page.png' alt='UI for seeing results' />
+              <img id='img-admin' src='/mobile_admin.png' alt='UI for seeing results' />
             </li>
           </ul>
           <button id='btn-next-step' onClick={handleNextClick}>
