@@ -4,6 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node server/server.js",
+    "build": "npm i && cd ../client && npm run i",
+    "prod": "concurrently \"npm run start\" \" cd ../client && npm run start\"",
     "test": "echo \"Error: no test specified\" && exit 1",
     "cypress:open": "cypress open",
     "cypress:test": "concurrently \"npm run dev\" \"npm run cypress:open\"",
@@ -20,7 +23,7 @@
     "mongoose": "^7.5.3"
   },
   "devDependencies": {
-    "concurrently": "^8.2.1",
+    "concurrently": "^8.2.2",
     "cypress": "^13.4.0",
     "nodemon": "^3.0.1"
   }
