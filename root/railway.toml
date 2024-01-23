@@ -1,7 +1,6 @@
 [build]
 builder = "nixpacks"
-dependsOn = ["setup"]
-cmds = ["cd /backend && npm run build"]
+buildCommand = "cd /backend npm run build"
 
 [deploy]
 cmds = ["cd /backend && npm run prod"]
