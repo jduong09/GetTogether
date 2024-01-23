@@ -2,7 +2,7 @@
 nixPkgs = ['nodejs, 'yarn']
 
 [phases.install]
-cmds = ["WORKDIR /backend", "npm i" "WORKDIR /client", "npm i"]
+cmds = ["WORKDIR /backend", "npm i", "WORKDIR /client", "npm i"]
 
 [phases.build]
 cmds = ["WORKDIR /backend", "npm run build"]
