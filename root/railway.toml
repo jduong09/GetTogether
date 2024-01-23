@@ -5,6 +5,7 @@ nixPkgs = ['nodejs', 'yarn']
 cmds = ["WORKDIR /backend", "npm i", "WORKDIR /client", "npm i"]
 
 [phases.build]
+builder = "NIXPACKS"
 cmds = ["WORKDIR /backend", "npm run build"]
 
 [deploy]

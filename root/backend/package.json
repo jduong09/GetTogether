@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node server/server.js",
+    "start": "serve build -s -n -L -p $PORT",
     "build": "npm i && cd /client && npm run i",
     "prod": "concurrently \"npm run start\" \" cd ../client && npm run start\"",
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -20,7 +20,8 @@
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "mongodb": "^6.1.0",
-    "mongoose": "^7.5.3"
+    "mongoose": "^7.5.3",
+    "serve": "^14.2.1"
   },
   "devDependencies": {
     "concurrently": "^8.2.2",
