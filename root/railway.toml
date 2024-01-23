@@ -1,5 +1,6 @@
 [build]
-builder = "nixpacks"
+builder = "NIXPACKS"
+providers = ['node']
 cmds = ["WORKDIR /backend", "npm run build"]
 
 [deploy]
