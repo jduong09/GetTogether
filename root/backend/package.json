@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node server/server.js",
-    "build": "npm i && cd ../client && npm run i",
+    "build": "npm i && cd ../client && npm i",
     "prod": "concurrently \"npm run start\" \" cd ../client && npm run start\"",
     "test": "echo \"Error: no test specified\" && exit 1",
     "cypress:open": "cypress open",
