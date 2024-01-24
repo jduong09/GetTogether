@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 5000;
 const app = express();
 app.use(bodyParser.json())
 
-const mongoDb = process.env.MONGO_URI;
+const mongoDb = process.env.PROD === 'false' ? process.env.MONGO_TEST_URI : process.env.MONGO_PROD_URI;
 
 mongoose.connect(mongoDb, {
   useUnifiedTopology: true,

@@ -23,7 +23,7 @@ export const PollDetailAdmin = () => {
   const handleUpdate = (e) => {
     e.preventDefault();
     // route to update form.
-    window.location = `http://localhost:3000/polls/${pollUuid}/update`
+    window.location = `${window.location.protocol + '//' + window.location.host}/polls/${pollUuid}/update`
   }
 
   const handleDelete = async (e) => {
