@@ -39,3 +39,14 @@ app.delete('/admin/:pollUuid', async (req, res, next) => {
   }
 });
 
+/** 
+ * @description Serve static files from express backend.
+*/
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(process.cwd(), 'client', 'build')));
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(process.cwd(), 'client', 'build', 'index.html'));
+  });
+}
