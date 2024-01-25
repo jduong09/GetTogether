@@ -15,7 +15,7 @@
   },
   "proxy": "https://gettogether-server.up.railway.app/",
   "scripts": {
-    "build": "npm i",
+    "build": "react-scripts build",
     "dev": "react-scripts start",
     "eject": "react-scripts eject",
     "start": "serve build -s -n -L -p $PORT",
