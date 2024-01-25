@@ -18,7 +18,7 @@ app.listen(PORT, () => {
   console.log(`App is listening on ${PORT}`)
 });
 
-const mongoDb = process.env.PROD === 'false' ? process.env.MONGO_TEST_URI : process.env.MONGO_PROD_URI;
+const mongoDb = process.env.NODE_ENV === 'DEVELOPMENT' ? process.env.MONGO_TEST_URI : process.env.MONGO_PROD_URI;
 
 mongoose.connect(mongoDb, {
   useUnifiedTopology: true,
