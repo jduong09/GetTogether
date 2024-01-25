@@ -45,9 +45,9 @@ app.delete('/admin/:pollUuid', async (req, res, next) => {
 */
 
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join('root', 'client', 'build')));
+  app.use(express.static(path.normalize('../client/build')));
 
   app.get('*', (req, res) => {
-    res.sendFile(path.join('root', 'client', 'build', 'index.html'));
+    res.sendFile(path.normalize('../client/build/index.html'));
   });
 }
