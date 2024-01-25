@@ -10,7 +10,12 @@ dotenv.config();
 const PORT = process.env.PORT || 5000;
 
 const app = express();
-app.use(bodyParser.json())
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.listen(PORT, () => {
+  console.log(`App is listening on ${PORT}`)
+});
 
 const mongoDb = process.env.PROD === 'false' ? process.env.MONGO_TEST_URI : process.env.MONGO_PROD_URI;
 
@@ -34,7 +39,3 @@ app.delete('/admin/:pollUuid', async (req, res, next) => {
   }
 });
 
-
-app.listen(PORT, "0.0.0.0", () => {
-  console.log(`App is listening on ${PORT}`)
-});
