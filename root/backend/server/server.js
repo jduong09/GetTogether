@@ -44,7 +44,7 @@ app.delete('/admin/:pollUuid', async (req, res, next) => {
  * @description Serve static files from express backend.
 */
 
-if (process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV === 'PRODUCTION') {
   app.use(express.static(path.normalize('../client/build')));
 
   app.get('*', (req, res) => {
