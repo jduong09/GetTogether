@@ -15,7 +15,7 @@
   },
   "proxy": "http://localhost:5000",
   "scripts": {
-    "build": "cd /backend && npm i && cd /client && npm i",
+    "build": "cd /client && npm i",
     "dev": "react-scripts start",
     "eject": "react-scripts eject",
     "start": "serve build -s -n -L -p $PORT",
