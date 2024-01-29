@@ -4,23 +4,27 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node server/server.js",
+    "build": "npm i && cd ../client && npm i && npm run build",
+    "prod": "concurrently \"cd ../client && npm run start\" \"npm run start\"",
     "test": "echo \"Error: no test specified\" && exit 1",
     "cypress:open": "cypress open",
     "cypress:test": "concurrently \"npm run dev\" \"npm run cypress:open\"",
     "server": "nodemon server/server.js",
-    "dev": "concurrently \"npm run server \" \" cd ../client && npm start \""
+    "dev": "concurrently \"npm run server \" \" cd ../client && npm run dev \""
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.20.2",
+    "concurrently": "^8.2.2",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "mongodb": "^6.1.0",
-    "mongoose": "^7.5.3"
+    "mongoose": "^7.5.3",
+    "wait-on": "^7.2.0"
   },
   "devDependencies": {
-    "concurrently": "^8.2.1",
     "cypress": "^13.4.0",
     "nodemon": "^3.0.1"
   }

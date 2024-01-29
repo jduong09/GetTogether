@@ -26,7 +26,7 @@ export const AdminPage = () => {
 
   const handleUpdate = (e) => {
     e.preventDefault();
-    window.location = `http://localhost:3000/polls/${pollUuid}/update`;
+    window.location = `${window.location.protocol + '//' + window.location.host}/${pollUuid}/update`;
   }
 
   const handleDelete = async (e) => {
