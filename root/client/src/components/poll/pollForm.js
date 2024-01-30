@@ -90,8 +90,8 @@ export const PollForm = ({ handleSubmit, editData }) => {
         </label>
       </div>
       <div>
-        <label htmlFor='inputDescription'>Description
-          <input id='inputDescription' name='pollDescription' type='text' onChange={e => setPollDescription(e.target.value)} placeholder='Meeting, Conference, Birthday Party...' value={pollDescription} />
+        <label htmlFor='textareaDescription'>Description
+          <textarea id='textareaDescription' name='pollDescription' rows='5' cols='33' onChange={e => setPollDescription(e.target.value)} placeholder='Meeting, Conference, Birthday Party...' value={pollDescription}></textarea>
           <span></span>
         </label>
       </div>

@@ -2,6 +2,10 @@ html {
   font-family: sans-serif;
 }
 
+body {
+  position: relative;
+}
+
 header {
   display: flex;
   justify-content: space-between;
