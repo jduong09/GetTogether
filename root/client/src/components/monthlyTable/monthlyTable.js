@@ -30,7 +30,7 @@ export const MonthlyTable = ({ pollAvailabilities, setPollAvailabilities }) => {
 
     const todaysMonth = todaysDate.getMonth();
     setMonth(todaysMonth);
-    setDaysInMonth(findDaysInMonth(todaysMonth))
+    setDaysInMonth(findDaysInMonth(todaysMonth));
   }, []);
 
   const handleNextMonth = (e) => {

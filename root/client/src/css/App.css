@@ -27,7 +27,7 @@ header > h2 {
   font-size: 2rem;
 }
 
-#svg-logo, #svg-description, #svg-location, #svg-edit, #svg-delete {
+#svg-logo, #svg-description, #svg-location, #svg-edit, #svg-delete, #svg-description-expand {
   fill: #FFFFFF;
 }
 
@@ -59,8 +59,9 @@ main {
 
 button {
   padding: .5rem 1.5rem;
-  font-weight: 600;
   border: 1px solid black;
+  font-weight: 600;
+  font-size: 1rem;
 }
 
 button:hover {
@@ -68,7 +69,6 @@ button:hover {
   border-color: #89CFF0;
   cursor: pointer;
 }
-
 
 #list-polls, #ul-availabilities {
   display: grid;
@@ -138,7 +138,6 @@ button:hover {
   #list-polls {
     grid-template-columns: repeat(3, 1fr);
   }
-
 }
 
 @media (min-width: 992px) {

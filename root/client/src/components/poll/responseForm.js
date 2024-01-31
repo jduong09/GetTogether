@@ -55,6 +55,7 @@ export const ResponseForm = ({ pollUuid, availabilities, responses, duration }) 
         <div id='div-form-submit'>
           <label htmlFor='name'>
             <input id='name' name='name' placeholder='Name...' value={name} onChange={(e) => setName(e.target.value)} required/>
+            <span></span>
           </label>
           <button id="btn-submit">Submit Response</button>
         </div>

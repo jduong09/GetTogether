@@ -1,6 +1,6 @@
 /* Header */
 header {
-  position: relative;
+  flex-wrap: wrap;
 }
 
 #header-desktop-poll-btns {
@@ -22,20 +22,13 @@ header {
 }
 
 #ul-mobile-poll-description, #ul-mobile-admin-description {
-  position: absolute;
-  top: 5rem;
-  left: 0;
   width: 100%;
   height: fit-content;
-  background-color: #89CFF0;
-  padding: 2rem;
-  z-index: 5;
-  box-shadow: 0 4px 2px -2px rgba(0, 0, 0, 0.08);
+  margin-top: 1rem;
 }
 
 #ul-mobile-admin-description > li, #ul-mobile-poll-description > li, #ul-poll-description > li {
   display: flex;
-  align-items: center;
   margin-bottom: 1rem;
 }
 
@@ -47,19 +40,37 @@ header {
   margin-right: .5rem;
 }
 
-#btn-admin-mobile-edit, #btn-admin-mobile-delete {
+#list-item-mobile-description > svg {
+  order: 1;
+}
+
+#list-item-mobile-description > span {
   width: 100%;
-  padding: .5rem;
-  border: 2px solid #FFFFFF;
-  background-color: #FFFFFF;
+  height: 16px;
+  overflow: hidden;
+  order: 2;
 }
 
-#btn-admin-mobile-edit {
-  margin-bottom: 1rem;
+#list-item-mobile-description > button {
+  display: inline-flex;
+  width: fit-content;
+  height: fit-content;
+  padding: 0;
+  border: 0;
+  order: 3;
 }
 
-#btn-admin-update {
-  margin-bottom: .25rem;
+button > #svg-description-expand {
+  transform: rotate(90deg);
+}
+
+button.expand > #svg-description-expand {
+  transform: rotate(0deg);
+}
+
+#list-item-mobile-description > button.expand + span {
+  overflow: visible;
+  height: auto;
 }
 
 /* Main */
@@ -133,13 +144,25 @@ header {
 
 #form-response #name {
   width: 100%;
-  background-color: #FFFFFF;
-  border: 1px solid #000000;
   margin-top: 0;
+  border: 1px solid #e7e5e5;
+  background-color: #e7e5e5;
 }
 
-#form-response #name:focus {
-  border-color: #89CFF0;
+#form-response #name + span {
+  display: block;
+  margin: auto;
+  height: 2px;
+  width: 0px;
+  position: absolute;
+  left: 0;
+  background-color: transparent;
+  transition: width .5s ease, background-color .5s ease;
+}
+
+#form-response #name:focus + span {
+  width: 100%;
+  background: #89CFF0;
 }
 
 #form-response > #div-form-submit > label, #btn-submit {
@@ -148,11 +171,10 @@ header {
 
 #btn-submit {
   width: 100%;
-  font-size: 1rem;
 }
 
 /* #div-form-submit */
-#div-form-submit {
+#div-form-submit, #div-admin-mobile-btns {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -164,18 +186,27 @@ header {
   z-index: 10;
   margin-bottom: 0;
   padding: 1rem 2rem;
-  background-color: #89CFF0;
+  background-color: #FFFFFF;
+  box-shadow: 0 -4px 2px -2px rgba(0, 0, 0, 0.08);
 }
 
 #form-response > #div-form-submit > label {
-  margin-right: .75rem;
+  width: 100%;
+}
+
+#div-admin-mobile-btns {
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+#btn-admin-mobile-edit, #btn-admin-mobile-delete {
+  width: 45%;
+  padding: .5rem;
+  border: 2px solid #000000;
+  background-color: #FFFFFF;
 }
 
 @media (min-width: 576px) {
-  #ul-mobile-poll-description {
-    bottom: -6rem;
-  }
-  
   #ul-availabilities {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -184,8 +215,13 @@ header {
     width: 50%;
   }
 
-  #form-response > #div-form-submit > label:last-of-type {
+  #div-form-submit {
+    flex-direction: row;
+  }
+
+  #form-response > #div-form-submit > label {
     width: calc(50% - .5rem);
+    margin-right: .75rem;
   }
 
   #btn-submit {
@@ -223,10 +259,6 @@ header {
     grid-template-columns: repeat(3, 1fr);
   }
 
-  #div-form-submit {
-    flex-direction: row;
-  }
-
   #form-response > #div-form-submit > label, #btn-submit {
     margin-bottom: 0;
   }
@@ -240,8 +272,12 @@ header {
     display: block;
   }
 
-  #header-mobile-description {
+  #header-mobile-description, #ul-mobile-poll-description, #ul-mobile-admin-description, #div-admin-mobile-btns {
     display: none;
+  }
+
+  #btn-admin-mobile-edit, #btn-admin-mobile-delete {
+    width: 100%;
   }
 }
 
