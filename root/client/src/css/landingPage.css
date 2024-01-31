@@ -37,16 +37,17 @@ main h1 {
 
 #img-create, #img-response, #img-admin {
   display: block;
-  width: auto;
-  height: 300px;
+  width: 100%;
+  height: auto;
   margin: 0 auto;
 }
 
-#img-response, #img-admin {
+#img-desktop-create, #img-desktop-response, #img-desktop-admin {
   display: none;
 }
 
 #div-steps {
+  width: 100%;
   display: flex;
   align-items: center;
   margin-bottom: 2rem;
@@ -82,12 +83,27 @@ main h1 {
 #list-workflow-steps > li > h2 {
   font-size: 1.25rem;
   margin-bottom: .5rem;
-  text-decoration: underline;
+}
+
+@media (min-width: 476px) {
+  #img-create, #img-response, #img-admin {
+    width: 80%;
+  }
 }
 
 @media (min-width: 576px) {
   #img-hero {
+    width: 65%;
+  }
+
+  #div-steps {
     width: 85%;
+    margin: 0 auto 2rem auto;
+  }
+
+  #img-create, #img-response, #img-admin {
+    width: 70%;
+    height: auto;
   }
 }
 
@@ -97,15 +113,18 @@ main h1 {
   }
 
   #img-hero {
-    width: 65%;
-  }
-
-  #btn-prev-step, #btn-next-step {
-    display: none;
+    width: 50%;
   }
 
   #img-create, #img-response, #img-admin {
+    display: none;
+  }
+
+  #img-desktop-create, #img-desktop-response, #img-desktop-admin {
     display: block;
+    width: 75%;
+    height: auto;
+    margin: 0 auto;
   }
 
   #list-workflow-steps > li {
@@ -126,7 +145,7 @@ main h1 {
   }
 
   #img-hero {
-    width: 50%;
+    width: 45%;
     order: 2;
   }
 
@@ -141,6 +160,7 @@ main h1 {
 
   #div-hero > div > span {
     width: 75%;
+    margin: 0 0 1rem 0;
   }
 
   #btn-prev-step:hover, #btn-next-step:hover {
@@ -156,5 +176,33 @@ main h1 {
 
   #list-workflow-steps > li {
     width: 33%;
+  }
+
+  #list-workflow-steps > li:nth-of-type(2), #list-workflow-steps > li:nth-of-type(3) {
+    display: block;
+  }
+
+  #btn-prev-step, #btn-next-step {
+    display: none;
+  }
+
+  #img-desktop-create, #img-desktop-response, #img-desktop-admin {
+    width: 60%;
+    height: auto;
+  }
+}
+
+@media (min-width: 1200px) {
+  #img-hero {
+    width: 35%;
+  }
+
+  #div-hero > div > h1 {
+    width: 70%;
+    font-size: 4rem;
+  }
+
+  #div-hero > div > span {
+    width: 50%;
   }
 }
