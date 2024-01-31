@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const bodyParser = require('body-parser');
+const path = require('path');
 const router = require('./api/router');
 const Poll = require('../db/models/poll');
 
@@ -10,9 +11,14 @@ dotenv.config();
 const PORT = process.env.PORT || 5000;
 
 const app = express();
-app.use(bodyParser.json())
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
-const mongoDb = process.env.MONGO_URI;
+app.listen(PORT, () => {
+  console.log(`App is listening on ${PORT}`)
+});
+
+const mongoDb = process.env.NODE_ENV === 'DEVELOPMENT' ? process.env.MONGO_TEST_URI : process.env.MONGO_PROD_URI;
 
 mongoose.connect(mongoDb, {
   useUnifiedTopology: true,
@@ -34,7 +40,13 @@ app.delete('/admin/:pollUuid', async (req, res, next) => {
   }
 });
 
+/** 
+ * @description Serve static files from express backend.
+*/
+if (process.env.NODE_ENV === 'PRODUCTION') {
+  app.use(express.static(path.join(process.cwd(), '..', 'client', 'build')));
 
-app.listen(PORT, () => {
-  console.log(`App is listening on ${PORT}`)
-});
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(process.cwd(), '..', 'client', 'build', 'index.html'));
+  });
+}
