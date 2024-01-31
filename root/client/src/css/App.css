@@ -69,13 +69,6 @@ button {
   border: 1px solid black;
 }
 
-button:hover {
-  background-color: #89CFF0;
-  border-color: #89CFF0;
-  cursor: pointer;
-}
-
-
 #list-polls, #ul-availabilities {
   display: grid;
   grid-template-columns: repeat(1, 1fr);

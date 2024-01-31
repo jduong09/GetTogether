@@ -7,14 +7,14 @@ header > h2 {
   border-color: #FFFFFF;
 }
 
-#btn-poll-new:hover {
+#btn-poll-new:hover, #btn-main-new:hover {
   background-color: #5CBDEA;
   border-color: #5CBDEA;
 }
 
 #img-hero {
   display: block;
-  width: 100%;
+  width: 75%;
   height: auto;
   margin: 0 auto;
 }
@@ -25,13 +25,14 @@ main h1 {
 }
 
 #div-hero {
-  margin-bottom: 2rem;
+  margin-bottom: 4rem;
   text-align: center;
 }
 
 #div-hero > div > span {
   display: block;
-  margin-bottom: .5rem;
+  width: 75%;
+  margin: 0 auto .5rem auto;
 }
 
 #img-create, #img-response, #img-admin {
@@ -53,6 +54,11 @@ main h1 {
 
 #btn-prev-step, #btn-next-step {
   border: 0;
+}
+
+#btn-prev-step:hover, #btn-next-step:hover {
+  background-color: none;
+  border-color: none;
 }
 
 #btn-prev-step {
@@ -135,6 +141,11 @@ main h1 {
 
   #div-hero > div > span {
     width: 75%;
+  }
+
+  #btn-prev-step:hover, #btn-next-step:hover {
+    background-color: #5CBDEA;
+    border-color: #5CBDEA;
   }
 
   #list-workflow-steps {
