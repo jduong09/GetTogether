@@ -218,17 +218,23 @@ th {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 #monthlyTable-header > h2, #week-current {
   background-color: #89CFF0;
 }
 
+#monthlyTable-header > ul {
+  width: 100%;
+  display: flex;
+}
+
 #btn-prev-month, #btn-next-month, #monthlyTable-header > h2, #week-current {
   padding: .5rem 1rem;
 }
 
-.monthlyCalendar-day {
+.monthlyCalendar-day, #monthlyTable-header > ul > li {
   width: calc(100% / 7);
   aspect-ratio: 1;
   display: flex;
