@@ -9,7 +9,7 @@ export const MonthlyTable = ({ pollAvailabilities, setPollAvailabilities }) => {
   const [daysInMonth, setDaysInMonth] = useState(null);
 
   useEffect(() => {
-    const todaysDate = new Date(Date.now());
+    const todaysDate = new Date(`${new Date(Date.now()).toISOString().slice(0, 10)}T12:00:00.000Z`);
     const dayOfWeek = todaysDate.getDay();
     const dayOfMonth = todaysDate.getDate();
     setYear(todaysDate.getFullYear());
@@ -17,19 +17,20 @@ export const MonthlyTable = ({ pollAvailabilities, setPollAvailabilities }) => {
     const numSinceFirst = dayOfMonth - 1;
 
     const numAdj = dayOfWeek + numSinceFirst > 7 ? numSinceFirst % 7 : 7 % numSinceFirst;
-
     let firstDayOfWeek;
-    if (numAdj + dayOfWeek > 6) {
-      firstDayOfWeek = numAdj + dayOfWeek - 6 + dayOfWeek;
+    
+    if (numAdj === 0) {
+      firstDayOfWeek = dayOfWeek - numSinceFirst;
+    } else if (numAdj > dayOfWeek) {
+      firstDayOfWeek = dayOfWeek + 7 - numAdj;
     } else {
-      firstDayOfWeek = numAdj + dayOfWeek;
+      firstDayOfWeek = dayOfWeek - numAdj;
     }
-
     setFirstDayOfMonth(findDayOfWeek(firstDayOfWeek))
 
     const todaysMonth = todaysDate.getMonth();
-    setMonth(todaysDate.getMonth());
-    setDaysInMonth(findDaysInMonth(todaysMonth))
+    setMonth(todaysMonth);
+    setDaysInMonth(findDaysInMonth(todaysMonth));
   }, []);
 
   const handleNextMonth = (e) => {
