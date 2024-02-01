@@ -1,22 +1,7 @@
-<<<<<<< HEAD
 html {
   font-family: sans-serif;
 }
 
-=======
-/*
-  Pastel Baby Blue: #89CFF0
-  Pastel Pink : #fea3aa
-  Pastel Orange: #f8b88b
-  Pastel yellow: #FAF884
-  Pastel Green: #BAED91
-  Pastel Purple: #F2A2E8
-*/
-body {
-  position: relative;
-  min-height: 100vh;
-}
->>>>>>> main
 header {
   display: flex;
   justify-content: space-between;
@@ -220,12 +205,11 @@ button {
   }
 }
 
-<<<<<<< HEAD
 @media (min-width: 1200px) {
   #list-polls {
     grid-template-columns: repeat(5, 1fr);
   }
-=======
+}
 .hide {
   display: none !important;
 }
@@ -268,5 +252,4 @@ label > input:focus + span {
   display: block;
   width: fit-content;
   margin: 0 auto;
->>>>>>> main
 }
