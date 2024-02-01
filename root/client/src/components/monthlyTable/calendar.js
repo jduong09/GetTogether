@@ -13,7 +13,7 @@ export const Calendar = ({ pollAvailabilities, year, month, firstDayOfMonth, day
     case 'Monday':
       col = 1;
       break;
-    case 'Tueday':
+    case 'Tuesday':
       col = 2;
       break;
     case 'Wednesday':

@@ -1,4 +1,4 @@
-import { React, useState } from 'react';
+import { React, useState, useRef } from 'react';
 import { Table } from '../table/table';
 import { MonthlyTable } from '../monthlyTable/monthlyTable';
 import { range } from '../../util/tablehelpers';
@@ -10,6 +10,8 @@ export const PollForm = ({ handleSubmit, editData }) => {
   const [pollDuration, setPollDuration] = useState(editData ? parseInt(editData.duration) : '15');
   const [pollAvailabilities, setPollAvailabilities] = useState(editData ? editData.availabilities : {});
   const [toggleDays, setToggleDays] = useState(editData && editData.duration === 1440 ? true : false);
+  const divAvailError = useRef(null);
+  const divBackground = useRef(null);
 
   const [pollStartDate, setPollStartDate] = useState(editData ? editData.startDate : '');
   const [pollEndDate, setPollEndDate] = useState(editData ? editData.endDate : '');
@@ -27,6 +29,16 @@ export const PollForm = ({ handleSubmit, editData }) => {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
+
+    if (!Object.keys(pollAvailabilities).length) {
+      divAvailError.current.classList.remove('hide');
+      divBackground.current.classList.remove('hide');
+      return;
+    }
+
+    divAvailError.current.classList.add('hide');
+    divBackground.current.classList.add('hide');
+
     toggleDays ? handleSubmit(e, { pollName, pollDescription, pollLocation, pollDuration, pollAvailabilities, pollStartDate : null, pollEndDate : null, pollStartTime: null, pollEndTime: null }, e.target.action, editData ? 'PATCH' : 'POST') : handleSubmit(e, { pollName, pollDescription, pollLocation, pollDuration, pollAvailabilities, pollStartDate, pollEndDate, pollStartTime, pollEndTime }, e.target.action, editData ? 'PATCH' : 'POST');
     resetFormData();
   }
@@ -54,6 +66,12 @@ export const PollForm = ({ handleSubmit, editData }) => {
       e.target.classList.add('selected');
     }
     setPollDuration(minutes);
+  }
+
+  const handleCloseModal = (e) => {
+    e.preventDefault();
+    divAvailError.current.classList.add('hide');
+    divBackground.current.classList.add('hide');
   }
 
   const listDurations = toggleDays
@@ -85,7 +103,7 @@ export const PollForm = ({ handleSubmit, editData }) => {
     <form id='form-create-edit' action={editData ? `/polls/${editData.id}` : '/polls'} onSubmit={(e) => handleFormSubmit(e)}>
       <div>
         <label htmlFor='inputName'>Name
-          <input id='inputName' name='pollName' type='text' onChange={e => setPollName(e.target.value)} placeholder='John Doe' value={pollName} />
+          <input id='inputName' name='pollName' type='text' onChange={e => setPollName(e.target.value)} placeholder='John Doe' value={pollName} required/>
           <span></span>
         </label>
       </div>
@@ -144,7 +162,12 @@ export const PollForm = ({ handleSubmit, editData }) => {
               endDate={pollEndDate}
               startTime={pollStartTime}
               endTime={pollEndTime} />)}
+        <div id='div-availabilities-error-message' className='hide' ref={divAvailError}>
+          <span>Form cannot be submitted without availabilities.</span>
+          <button id="btn-modal-close" onClick={handleCloseModal}>Close</button>
+        </div>
       </div>
+      <div id="div-background-overlay" className='hide' ref={divBackground}></div>
       <button type='submit' id="btn-form-submit">{editData ? 'Update' : 'Create'}</button>
     </form>
   );

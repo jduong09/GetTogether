@@ -10,44 +10,29 @@ export const MonthlyTable = ({ pollAvailabilities, setPollAvailabilities }) => {
 
   useEffect(() => {
     const todaysDate = new Date(`${new Date(Date.now()).toISOString().slice(0, 10)}T12:00:00.000Z`);
-    const dayOfWeek = todaysDate.getDay();
-    const dayOfMonth = todaysDate.getDate();
-    setYear(todaysDate.getFullYear());
-    
-    const numSinceFirst = dayOfMonth - 1;
-
-    const numAdj = dayOfWeek + numSinceFirst > 7 ? numSinceFirst % 7 : 7 % numSinceFirst;
-    let firstDayOfWeek;
-    
-    if (numAdj === 0) {
-      firstDayOfWeek = dayOfWeek - numSinceFirst;
-    } else if (numAdj > dayOfWeek) {
-      firstDayOfWeek = dayOfWeek + 7 - numAdj;
-    } else {
-      firstDayOfWeek = dayOfWeek - numAdj;
-    }
-    setFirstDayOfMonth(findDayOfWeek(firstDayOfWeek))
-
     const todaysMonth = todaysDate.getMonth();
+    const todaysYear = todaysDate.getFullYear(); 
+    const fomDateObj = todaysMonth < 9 ? new Date(`${todaysYear}-0${todaysMonth + 1}-01T12:00:00.000Z`) : new Date(`${todaysYear}-${todaysMonth + 1}-01T12:00:00.000Z`);
+    setYear(todaysYear);  
+    setFirstDayOfMonth(findDayOfWeek(fomDateObj.getDay()));
     setMonth(todaysMonth);
-    setDaysInMonth(findDaysInMonth(todaysMonth))
+    setDaysInMonth(findDaysInMonth(todaysMonth, todaysYear));
   }, []);
 
   const handleNextMonth = (e) => {
     e.preventDefault();
-
     if (month === 11) {
       setMonth(0);
       const newYr = year + 1;
       setDaysInMonth(findDaysInMonth(0, newYr));
       setYear(newYr);
-      const dateObjectFOM = new Date(newYr, 0, 1);
+      const dateObjectFOM = new Date(`${newYr}-01-01T12:00:00:00.000Z`);
       setFirstDayOfMonth(findDayOfWeek(dateObjectFOM.getDay()));
     } else {
       const newMth = month + 1;
       setMonth(newMth);
       setDaysInMonth(findDaysInMonth(newMth, year));
-      const dateObjectFOM = new Date(year, newMth, 1);
+      const dateObjectFOM = newMth < 9 ? new Date(`${year}-0${newMth + 1}-01T12:00:00.000Z`) : new Date(`${year}-${newMth + 1}-01T12:00:00.000Z`);
       setFirstDayOfMonth(findDayOfWeek(dateObjectFOM.getDay()));
     }
   };
@@ -60,17 +45,13 @@ export const MonthlyTable = ({ pollAvailabilities, setPollAvailabilities }) => {
       const newYr = year - 1;
       setDaysInMonth(findDaysInMonth(11, newYr));
       setYear(newYr);
-      
-      const dateObjectFOM = new Date(newYr, 11, 1);
-
+      const dateObjectFOM = new Date(`${newYr}-12-01T12:00:00.000Z`);
       setFirstDayOfMonth(findDayOfWeek(dateObjectFOM.getDay()));
     } else {
       const newMth = month - 1;
       setMonth(newMth);
       setDaysInMonth(findDaysInMonth(newMth, year));
-
-      const dateObjectFOM = new Date(year, newMth, 1);
-
+      const dateObjectFOM = newMth < 9 ? new Date(`${year}-0${newMth + 1}-01T12:00:00.000Z`) : new Date(`${year}-${newMth + 1}-01T12:00:00.000Z`);
       setFirstDayOfMonth(findDayOfWeek(dateObjectFOM.getDay()));
     }
   }
@@ -106,6 +87,15 @@ export const MonthlyTable = ({ pollAvailabilities, setPollAvailabilities }) => {
             <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg>
           </button>
         </div>
+        <ul id='list-calendar-days'>
+          <li>Sun</li>
+          <li>Mon</li>
+          <li>Tues</li>
+          <li>Wed</li>
+          <li>Thu</li>
+          <li>Fri</li>
+          <li>Sat</li>
+        </ul>
       </div>
       <Calendar pollAvailabilities={pollAvailabilities} year={year} month={month} firstDayOfMonth={firstDayOfMonth} daysInMonth={daysInMonth} handleDayClick={handleDayClick} />
     </div>

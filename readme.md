@@ -1,6 +1,6 @@
-# Doodle Clone
+# GetTogether
 
-Doodle Clone is a React App for creating polls to schedule meetings, get-togethers and other social events.
+GetTogether is a React App for creating polls to schedule meetings, get-togethers and other social events.
 
 ## Installation
 
