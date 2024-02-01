@@ -1,26 +1,11 @@
-<<<<<<< HEAD
 html {
   font-family: sans-serif;
 }
 
 body {
   position: relative;
-}
-
-=======
-/*
-  Pastel Baby Blue: #89CFF0
-  Pastel Pink : #fea3aa
-  Pastel Orange: #f8b88b
-  Pastel yellow: #FAF884
-  Pastel Green: #BAED91
-  Pastel Purple: #F2A2E8
-*/
-body {
-  position: relative;
   min-height: 100vh;
 }
->>>>>>> main
 header {
   display: flex;
   justify-content: space-between;
