@@ -130,8 +130,6 @@ button:hover {
   display: flex;
 }
 
-<<<<<<< HEAD
-=======
 #monthlyTable-header {
   display: flex;
   align-items: flex-end;
@@ -187,7 +185,6 @@ button:hover {
   background-color: #FFFFFF !important;
 }
 
->>>>>>> main
 .week > li > h2 {
   font-weight: 700;
 }
@@ -219,12 +216,6 @@ button:hover {
   }
 }
 
-<<<<<<< HEAD
-@media (min-width: 1200px) {
-  #list-polls {
-    grid-template-columns: repeat(5, 1fr);
-  }
-=======
 label > input:focus + span {
   width: 75%;
   background: #89CFF0;
@@ -263,5 +254,4 @@ label > input:focus + span {
   display: block;
   width: fit-content;
   margin: 0 auto;
->>>>>>> main
 }
