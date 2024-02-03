@@ -6,6 +6,7 @@ body {
   position: relative;
   min-height: 100vh;
 }
+
 header {
   display: flex;
   justify-content: space-between;
@@ -67,7 +68,6 @@ button {
 button:hover {
   background-color: #89CFF0;
   border-color: #89CFF0;
-  cursor: pointer;
 }
 
 #list-polls, #ul-availabilities {
@@ -110,75 +110,7 @@ button:hover {
 #list-polls > li > button:last-child {
   margin-bottom: 0;
 }
-
-.week {
-  display: flex;
-}
-
-#monthlyTable-header {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  flex-wrap: wrap;
-}
-
-#monthlyTable-header > h2, #week-current {
-  background-color: #89CFF0;
-}
-
-#monthlyTable-header > ul {
-  width: 100%;
-  display: flex;
-}
-
-#btn-prev-month, #btn-next-month, #monthlyTable-header > h2, #week-current {
-  padding: .5rem 1rem;
-}
-
-.monthlyCalendar-day, #monthlyTable-header > ul > li {
-  width: calc(100% / 7);
-  aspect-ratio: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid black;
-  cursor: pointer;
-}
-
-.monthlyCalendar-day.disabled {
-  pointer-events: none;
-}
-
-.monthlyCalendar-day.selected, #btn-toggle-times.selected, #btn-toggle-days.selected, #btn-toggle-times.selected:hover, #btn-toggle-days.selected:hover {
-  background-color: #89CFF0;
-}
-
-#btn-toggle-times, #btn-toggle-days, #btn-prev-month, #btn-next-month {
-  border: none;
-}
-
-.monthlyCalendar-day:hover {
-  background-color: #5CBDEA;
-}
-
-#btn-toggle-times:hover, #btn-toggle-days:hover {
-  background-color: #89CFF0;
-}
-
-.monthlyCalendar-day.selected:hover {
-  background-color: #FFFFFF !important;
-}
-
-.week > li > h2 {
-  font-weight: 700;
-}
-
-/* Testing CSS */
-#btn-form-submit:hover {
-  border-color: #89CFF0;
-}
-
+  
 .hide {
   display: none !important;
 }
@@ -199,44 +131,4 @@ button:hover {
   #list-polls {
     grid-template-columns: repeat(4, 1fr);
   }
-}
-
-label > input:focus + span {
-  width: 75%;
-  background: #89CFF0;
-}
-
-#div-availabilities-error-message {
-  position: absolute;
-  z-index: 15;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border: 2px solid #000000;
-  background-color: #FFFFFF;
-  padding: 2rem;
-}
-
-#div-background-overlay {
-  position: absolute;
-  z-index: 8;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: hsla(0, 0%, 0%, .1);
-}
-
-#div-availabilities-error-message > span {
-  display: block;
-  text-align: center;
-  margin-bottom: 1rem;
-  font-size: 1rem;
-  font-weight: 400;
-}
-
-#btn-modal-close {
-  display: block;
-  width: fit-content;
-  margin: 0 auto;
 }
