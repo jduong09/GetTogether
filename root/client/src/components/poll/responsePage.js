@@ -67,9 +67,9 @@ export const ResponsePage = () => {
           {description && 
             <li id='list-item-mobile-description'>
               <svg id="svg-description" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 448 512"><path d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H288V368c0-26.5 21.5-48 48-48H448V96c0-35.3-28.7-64-64-64H64zM448 352H402.7 336c-8.8 0-16 7.2-16 16v66.7V480l32-32 64-64 32-32z"/></svg>
-              <button onClick={handleDescriptionExpand} ref={btnDescriptionExpand}>
+              {description.length >= 90 && <button onClick={handleDescriptionExpand} ref={btnDescriptionExpand}>
                 <svg id="svg-description-expand" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 320 512"><path d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z"/></svg>
-              </button>
+              </button>}
               <span>{description}</span>
             </li>}
           {location &&
