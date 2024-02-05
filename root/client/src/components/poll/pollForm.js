@@ -13,7 +13,6 @@ export const PollForm = ({ handleSubmit, editData }) => {
   const divAvailError = useRef(null);
   const divBackground = useRef(null);
 
-  // 2023-12-25
   const [pollStartDate, setPollStartDate] = useState(editData ? editData.startDate : '');
   const [pollEndDate, setPollEndDate] = useState(editData ? editData.endDate : '');
   
@@ -101,7 +100,7 @@ export const PollForm = ({ handleSubmit, editData }) => {
   });
 
   return (
-    <form action={editData ? `/polls/${editData.id}` : '/polls'} onSubmit={(e) => handleFormSubmit(e)}>
+    <form id='form-create-edit' action={editData ? `/polls/${editData.id}` : '/polls'} onSubmit={(e) => handleFormSubmit(e)}>
       <div>
         <label htmlFor='inputName'>Name
           <input id='inputName' name='pollName' type='text' onChange={e => setPollName(e.target.value)} placeholder='John Doe' value={pollName} required/>
@@ -109,8 +108,8 @@ export const PollForm = ({ handleSubmit, editData }) => {
         </label>
       </div>
       <div>
-        <label htmlFor='inputDescription'>Description
-          <input id='inputDescription' name='pollDescription' type='text' onChange={e => setPollDescription(e.target.value)} placeholder='Meeting, Conference, Birthday Party...' value={pollDescription} />
+        <label htmlFor='textareaDescription'>Description
+          <textarea id='textareaDescription' name='pollDescription' rows='5' cols='33' onChange={e => setPollDescription(e.target.value)} placeholder='Meeting, Conference, Birthday Party...' value={pollDescription}></textarea>
           <span></span>
         </label>
       </div>
@@ -126,16 +125,19 @@ export const PollForm = ({ handleSubmit, editData }) => {
           <label htmlFor='inputStartDate'>Start Date
             <input id='inputStartDate' name='pollStartDate' type='date' onChange={e => { setPollStartDate(e.target.value) }} value={pollStartDate} />
           </label>
+        </div>}
+      {!toggleDays &&
+        <div>
           <label htmlFor='inputEndDate'>End Date
             <input id='inputEndDate' name='pollEndDate' type='date' onChange={e => { setPollEndDate(e.target.value) }} value={pollEndDate} />
           </label>
         </div>}
-      {pollStartDate && pollEndDate &&
-        <div>
-          <label htmlFor='selectStartTime'>Start Time
+      {!toggleDays &&
+        <div id='div-select-times'>
+          <label className='label-select-time' htmlFor='selectStartTime'>Start Time
             <select id='selectStartTime' onChange={(e) => setPollStartTime(parseInt(e.target.value))} value={pollStartTime} >{listStartOptions}</select>
           </label>
-          <label htmlFor='selectEndTime'>End Time
+          <label className='label-select-time' htmlFor='selectEndTime'>End Time
             <select id='selectEndTime' onChange={(e) => setPollEndTime(parseInt(e.target.value))} value={pollEndTime} >{listEndOptions}</select>
           </label>
         </div>}
