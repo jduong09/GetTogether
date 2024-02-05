@@ -19,7 +19,7 @@ label {
   position: relative;
 }
 
-label > input, label > select {
+label > input, label > select, label > textarea {
   display: block;
   width: 100%;
   padding: .5rem;
@@ -30,7 +30,7 @@ label > input, label > select {
   background-color: #e7e5e5;
 }
 
-label > input + span {
+label > input + span, label > textarea + span {
   display: block;
   margin: auto;
   height: 2px;
@@ -41,7 +41,7 @@ label > input + span {
   transition: width .5s ease, background-color .5s ease;
 }
 
-label > input:focus + span {
+label > input:focus + span, label > textarea:focus + span {
   width: 100%;
   background: #89CFF0;
 }
@@ -109,8 +109,13 @@ form > label:last-of-type, #div-availabilities-table, table, thead, tr {
 
 #btn-form-submit {
   display: block;
+  width: 100%;
   margin: 1rem auto;
-  border: 2px solid black;
+  border: 2px solid #000000;
+}
+
+#btn-form-submit:hover {
+  border-color: #89CFF0;
 }
 
 #div-monthlyTable > h2 {
@@ -161,11 +166,45 @@ form > label:last-of-type, #div-availabilities-table, table, thead, tr {
   width: 100%;
 }
 
+#div-background-overlay {
+  position: absolute;
+  z-index: 8;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: hsla(0, 0%, 0%, .1);
+}
+
+#div-availabilities-error-message {
+  position: absolute;
+  z-index: 15;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 2px solid #000000;
+  background-color: #FFFFFF;
+  padding: 2rem;
+}
+
+#div-availabilities-error-message > span {
+  display: block;
+  text-align: center;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+#btn-modal-close {
+  display: block;
+  width: fit-content;
+  margin: 0 auto;
+}
+
 @media (min-width: 768px) {
   #form-create-edit {
     flex-direction: row;
     justify-content: space-between;
-    align-items: center;
     flex-wrap: wrap;
   }
 

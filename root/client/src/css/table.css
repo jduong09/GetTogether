@@ -168,7 +168,6 @@ td {
 }
 
 .btn-close {
-  /* padding: .25rem .5rem; */
   padding: 0;
   border: 0;
   margin: 0 0 0 auto;
@@ -179,6 +178,7 @@ td {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 #monthlyTable-header > h2 {
@@ -193,7 +193,20 @@ td {
   padding: .5rem 1rem;
 }
 
-.monthlyCalendar-day {
+#monthlyTable-header > ul {
+  width: 100%;
+  display: flex;
+}
+
+.week {
+  display: flex;
+}
+
+.week > li {
+  font-weight: 700;
+}
+
+.monthlyCalendar-day, #monthlyTable-header > ul > li {
   width: calc(100% / 7);
   aspect-ratio: 1;
   display: flex;
@@ -217,7 +230,7 @@ td {
   pointer-events: none;
 }
 
-.monthlyCalendar-day.selected, #btn-toggle-times.selected, #btn-toggle-days.selected, #btn-toggle-times.selected:hover, #btn-toggle-days.selected:hover {
+.monthlyCalendar-day.selected, #btn-toggle-times.selected, #btn-toggle-days.selected, #btn-toggle-times.selected:hover, #btn-toggle-days.selected:hover, #btn-toggle-times:hover, #btn-toggle-days:hover {
   background-color: #89CFF0;
 }
 

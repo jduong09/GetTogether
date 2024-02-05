@@ -1,11 +1,16 @@
 import '../../css/response_admin.css';
-import { React, useEffect, useState } from 'react';
+import { React, useEffect, useState, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { ResultsList } from './resultsList'
 
 export const AdminPage = () => {
   const { pollUuid } = useParams();
   const [pollData, setPollData] = useState('');
+  const listMobileDescription = useRef(null);
+  const btnMobileOpen = useRef(null);
+  const btnMobileClose = useRef(null);
+  const btnDescriptionExpand = useRef(null);
+
   
   useEffect(() => {
     const fetchPollData = async () => {
@@ -22,8 +27,7 @@ export const AdminPage = () => {
 
   const handleUpdate = (e) => {
     e.preventDefault();
-    // route to update form.
-    window.location = `http://localhost:3000/polls/${pollUuid}/update`
+    window.location = `${window.location.protocol + '//' + window.location.host}/polls/${pollUuid}/update`;
   }
 
   const handleDelete = async (e) => {
@@ -39,7 +43,30 @@ export const AdminPage = () => {
     }
   };
 
-  const { name, duration, availabilities, responses } = pollData;
+  const handleOpenDescription = (e) => {
+    e.preventDefault();
+    listMobileDescription.current.classList.remove('hide');
+    btnMobileOpen.current.classList.add('hide');
+    btnMobileClose.current.classList.remove('hide');
+  }
+
+  const handleCloseDescription = (e) => {
+    e.preventDefault();
+    listMobileDescription.current.classList.add('hide');
+    btnMobileOpen.current.classList.remove('hide');
+    btnMobileClose.current.classList.add('hide');
+  }
+
+  const handleDescriptionExpand = (e) => {
+    e.preventDefault();
+    if (btnDescriptionExpand.current.classList.contains('expand')) {
+      btnDescriptionExpand.current.classList.remove('expand');
+    } else {
+      btnDescriptionExpand.current.classList.add('expand');
+    }
+  }
+
+  const { name, description, location, duration, availabilities, responses } = pollData;
 
   return (
     <div>
@@ -49,32 +76,69 @@ export const AdminPage = () => {
           <span>GetTogether</span>
         </h1>
         <h2>{name}</h2>
-        <div id="header-poll-btns">
-          <ul id="list-desktop">
+        <div id='header-desktop-poll-btns'>
+          <ul id="ul-desktop-poll-btns">
             <li>
-              <button id='btn-admin-update' onClick={(e) => handleUpdate(e)}>Update Poll</button>
-            </li>
-            <li>
-              <button id='btn-admin-delete' onClick={handleDelete}>Delete Poll</button>
-            </li>
-          </ul>
-          <ul id="list-mobile">
-            <li>
-              <button id='btn-admin-mobile-edit'>
-                <svg id="svg-edit" xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512"><path d="M362.7 19.3L314.3 67.7 444.3 197.7l48.4-48.4c25-25 25-65.5 0-90.5L453.3 19.3c-25-25-65.5-25-90.5 0zm-71 71L58.6 323.5c-10.4 10.4-18 23.3-22.2 37.4L1 481.2C-1.5 489.7 .8 498.8 7 505s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L421.7 220.3 291.7 90.3z"/></svg>
+              <button id='btn-admin-mobile-edit' onClick={(e) => handleUpdate(e)}>
+                Edit Poll
               </button>
             </li>
             <li>
-              <button id='btn-admin-mobile-delete'>
-                <svg id="svg-delete" xmlns="http://www.w3.org/2000/svg" height="16" width="14" viewBox="0 0 448 512"><path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"/></svg>
+              <button id='btn-admin-mobile-delete' onClick={handleDelete}>
+                Delete Poll
               </button>
             </li>
           </ul>
         </div>
+        <div id="header-poll-btns">
+          <button id='btn-mobile-open' className='hide' onClick={handleOpenDescription} ref={btnMobileOpen}>
+            <svg xmlns="http://www.w3.org/2000/svg" height="16" width="14" viewBox="0 0 448 512"><path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z" fill="#FFFFFF"/></svg>
+          </button>
+          <button id='btn-mobile-close' onClick={handleCloseDescription} ref={btnMobileClose}>
+            <svg xmlns="http://www.w3.org/2000/svg" height="16" width="12" viewBox="0 0 384 512"><path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z" fill="#FFFFFF"/></svg>
+          </button>
+        </div>
+        <ul id="ul-mobile-admin-description" ref={listMobileDescription}>
+          {description && 
+            <li id='list-item-mobile-description'>
+              <svg id="svg-description" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 448 512"><path d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H288V368c0-26.5 21.5-48 48-48H448V96c0-35.3-28.7-64-64-64H64zM448 352H402.7 336c-8.8 0-16 7.2-16 16v66.7V480l32-32 64-64 32-32z"/></svg>
+              {description.length >= 90 && <button onClick={handleDescriptionExpand} ref={btnDescriptionExpand}>
+                <svg id="svg-description-expand" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 320 512"><path d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z"/></svg>
+              </button>}
+              <span>{description}</span>
+            </li>}
+          {location &&
+            <li>
+              <svg id="svg-location" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 384 512"><path d="M384 192c0 87.4-117 243-168.3 307.2c-12.3 15.3-35.1 15.3-47.4 0C117 435 0 279.4 0 192C0 86 86 0 192 0S384 86 384 192z"/></svg>
+              <span>{location}</span>
+            </li>}
+        </ul>
       </header>
       <main>
+        <div id='div-description'>
+          <ul id="ul-poll-description">
+            {description && 
+              <li>
+                <svg id="svg-description" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 448 512"><path d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H288V368c0-26.5 21.5-48 48-48H448V96c0-35.3-28.7-64-64-64H64zM448 352H402.7 336c-8.8 0-16 7.2-16 16v66.7V480l32-32 64-64 32-32z"/></svg>
+                {description}
+              </li>}
+            {location &&
+              <li>
+                <svg id="svg-location" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 384 512"><path d="M384 192c0 87.4-117 243-168.3 307.2c-12.3 15.3-35.1 15.3-47.4 0C117 435 0 279.4 0 192C0 86 86 0 192 0S384 86 384 192z"/></svg>
+                {location}
+              </li>}
+          </ul>
+        </div>
         <div id="div-admin-availabilities">
           <ul id='ul-availabilities'>{availabilities && <ResultsList availabilities={availabilities} responses={responses} duration={duration} />}</ul>
+        </div>
+        <div id="div-admin-mobile-btns">
+          <button id='btn-admin-mobile-edit' onClick={handleUpdate}>
+            Edit Poll
+          </button>
+          <button id='btn-admin-mobile-delete' onClick={handleDelete}>
+            Delete Poll
+          </button>
         </div>
       </main>
     </div>
