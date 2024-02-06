@@ -1,5 +1,5 @@
-header > h2 {
-  display: none;
+#header-landingPage > h1 > span {
+  display: block;
 }
 
 #btn-poll-new {

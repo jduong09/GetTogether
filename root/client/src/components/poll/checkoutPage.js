@@ -31,14 +31,14 @@ export const CheckoutPage = () => {
           <div>
             <div className='div-link'>
               Share this link to get responses:
-              <h2><a href={`http://localhost:3000/polls/${pollData.id}`}>{`http://localhost:3000/polls/${pollData.id}`}</a></h2>
+              <h2><a href={`${window.location.protocol + '//' + window.location.host}/polls/${pollData.id}`} target='_blank' rel='noreferrer'>Link</a></h2>
             </div>
             <div className='div-link'>
-              Use this link to see responses and edit poll:
-              <h2><a href={`http://localhost:3000/admin/${pollData.id}`}>{`http://localhost:3000/admin/${pollData.id}`}</a></h2>
+              Use this link to see to make changes:
+              <h2><a href={`${window.location.protocol + '//' + window.location.host}/admin/${pollData.id}`} target='_blank' rel='noreferrer'>Link</a></h2>
             </div>
           </div>}
       </main>
     </div>
-  )
+  );
 }

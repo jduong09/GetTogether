@@ -79,12 +79,12 @@ export const AdminPage = () => {
         <div id='header-desktop-poll-btns'>
           <ul id="ul-desktop-poll-btns">
             <li>
-              <button id='btn-admin-mobile-edit' onClick={(e) => handleUpdate(e)}>
+              <button id='btn-admin-desktop-edit' onClick={(e) => handleUpdate(e)}>
                 Edit Poll
               </button>
             </li>
             <li>
-              <button id='btn-admin-mobile-delete' onClick={handleDelete}>
+              <button id='btn-admin-desktop-delete' onClick={handleDelete}>
                 Delete Poll
               </button>
             </li>
