@@ -88,13 +88,13 @@ export const MonthlyTable = ({ pollAvailabilities, setPollAvailabilities }) => {
           </button>
         </div>
         <ul id='list-calendar-days'>
-          <li>Sun</li>
-          <li>Mon</li>
-          <li>Tues</li>
-          <li>Wed</li>
-          <li>Thu</li>
-          <li>Fri</li>
-          <li>Sat</li>
+          <li><h3>Sun</h3></li>
+          <li><h3>Mon</h3></li>
+          <li><h3>Tue</h3></li>
+          <li><h3>Wed</h3></li>
+          <li><h3>Thu</h3></li>
+          <li><h3>Fri</h3></li>
+          <li><h3>Sat</h3></li>
         </ul>
       </div>
       <Calendar pollAvailabilities={pollAvailabilities} year={year} month={month} firstDayOfMonth={firstDayOfMonth} daysInMonth={daysInMonth} handleDayClick={handleDayClick} />

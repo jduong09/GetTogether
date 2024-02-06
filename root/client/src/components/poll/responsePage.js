@@ -79,6 +79,7 @@ export const ResponsePage = () => {
               <span>{location}</span>
             </li>}
         </ul>
+        <div id="div-empty"></div>
       </header>
       <main>
         <div id='div-description'>

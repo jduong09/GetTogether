@@ -7,10 +7,8 @@ export const calculateTimeFrame = (startTime, duration) => {
   const parsedHour = parseInt(hour);
   const parsedMinute = parseInt(minutes);
   const timeSuffix = parsedHour >= 12 ? 'PM' : 'AM';
-  // const convertedHours = hour < 12  ? `${hour === '00' ? 12 : parseInt(hour)}` : `${hour - 12 === 0 ? 12 : parseInt(hour) - 12}`;
   let newMinutes = parsedMinute + parseInt(duration);
   
-  // If newMinutes < 60, then hour does not need to change. The hour in the start time and end time will the same.
   if (newMinutes < 60) {
     if (parsedHour === 0) {
       return `12:${minutes}AM - 12:${newMinutes}AM`;
@@ -18,7 +16,6 @@ export const calculateTimeFrame = (startTime, duration) => {
       return `${parsedHour <= 12 ? parsedHour : parsedHour - 12}:${minutes}${timeSuffix} - ${parsedHour <= 12 ? parsedHour : parsedHour - 12}:${newMinutes}${timeSuffix}`;
     }
   } else {
-    // New Minutes is greater than one hour, now the end time hour needs to be changed.
     let newHour = newMinutes < 120 ? parsedHour + 1 : parsedHour + 2;
 
     let endTimeSuffix = newHour >= 12 && newHour < 24 ? 'PM' : 'AM';

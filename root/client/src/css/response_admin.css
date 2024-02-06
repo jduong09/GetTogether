@@ -1,6 +1,9 @@
-/* Header */
 header {
   flex-wrap: wrap;
+}
+
+#div-empty {
+  display: none;
 }
 
 #header-desktop-poll-btns {
@@ -8,6 +11,8 @@ header {
 }
 
 #btn-mobile-open, #btn-mobile-close {
+  display: block;
+  margin: 0 0 0 auto;
   border: 0;
   padding: 0;
 }
@@ -19,12 +24,22 @@ header {
 #ul-desktop-poll-btns {
   display: flex;
   align-content: center;
+  justify-content: flex-end;
+}
+
+#ul-desktop-poll-btns > li:first-child {
+  margin-right: 1rem;
 }
 
 #ul-mobile-poll-description, #ul-mobile-admin-description {
   width: 100%;
   height: fit-content;
   margin-top: 1rem;
+}
+
+#btn-admin-desktop-edit, #btn-admin-desktop-delete {
+  border: 0;
+  background-color: #FFFFFF;
 }
 
 #ul-mobile-admin-description > li, #ul-mobile-poll-description > li, #ul-poll-description > li {
@@ -73,7 +88,6 @@ button.expand > #svg-description-expand {
   height: auto;
 }
 
-/* Main */
 #div-description {
   display: none;
   margin-bottom: 1rem;
@@ -173,7 +187,6 @@ button.expand > #svg-description-expand {
   width: 100%;
 }
 
-/* #div-form-submit */
 #div-form-submit, #div-admin-mobile-btns {
   display: flex;
   flex-direction: column;
@@ -235,6 +248,10 @@ button.expand > #svg-description-expand {
     margin: 0 auto;
   }
 
+  #div-empty {
+    display: block;
+  }
+
   #header-desktop-poll-btns {
     display: block;
   }
@@ -278,6 +295,7 @@ button.expand > #svg-description-expand {
 
   #btn-admin-mobile-edit, #btn-admin-mobile-delete {
     width: 100%;
+    border: 2px solid #000000;
   }
 }
 

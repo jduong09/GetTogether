@@ -141,7 +141,6 @@ export const PollForm = ({ handleSubmit, editData }) => {
             <select id='selectEndTime' onChange={(e) => setPollEndTime(parseInt(e.target.value))} value={pollEndTime} >{listEndOptions}</select>
           </label>
         </div>}
-      {/* Does this input need to be here anymore. */}
       <label htmlFor='inputAvailabilities'>
         <input id='inputAvailabilities' name='pollAvailabilities' type='text' value={pollAvailabilities} readOnly="readOnly" hidden/>
       </label>

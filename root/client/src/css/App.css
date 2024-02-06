@@ -16,6 +16,7 @@ header {
   padding: 2rem;
   margin-bottom: 2rem;
   background-color: #89CFF0;
+  color: #FFFFFF;
 }
 
 header > h1 {
@@ -24,8 +25,14 @@ header > h1 {
 }
 
 header > h1 > span {
+  display: none;
   color: #FFFFFF;
   margin-left: .5rem;
+}
+
+header > :first-child, header > :nth-child(3), #div-empty, #header-poll-btns {
+  flex-grow: 1;
+  flex-basis: 0;
 }
 
 button {
@@ -56,7 +63,7 @@ header > h2 {
 }
 
 main {
-  padding: 0 2rem;
+  padding: 0 2rem 10rem 2rem;
 }
 
 #div-main-header {
@@ -76,11 +83,6 @@ button {
   border: 1px solid black;
   font-weight: 600;
   font-size: 1rem;
-}
-
-button:hover {
-  background-color: #89CFF0;
-  border-color: #89CFF0;
 }
 
 #list-polls, #ul-availabilities {
