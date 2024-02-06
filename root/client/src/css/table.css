@@ -18,10 +18,6 @@
   padding: .25rem .5rem;
 }
 
-#btn-prev-week:hover, #btn-next-week:hover {
-  background-color: #89CFF0;
-}
-
 table {
   width: 100%;
   border-collapse: collapse;
@@ -88,7 +84,7 @@ td {
   height: 100px;
 }
 
-.cell-half-hour.disabled {
+.cell-half-hour.disabled, .monthlyCalendar-day.disabled {
   background-color: rgb(211, 211, 211) !important;
   pointer-events: none;
 }
@@ -206,7 +202,19 @@ td {
   font-weight: 700;
 }
 
-.monthlyCalendar-day, #monthlyTable-header > ul > li {
+.week > li:first-child, #list-calendar-days > li:first-child {
+  border-left: 2px solid #000000;
+}
+
+.week > li:last-child, #list-calendar-days > li:last-child {
+  border-right: 2px solid #000000;
+}
+
+.week:last-of-type > li {
+  border-bottom: 2px solid #000000;
+}
+
+.monthlyCalendar-day, #list-calendar-days > li{
   width: calc(100% / 7);
   aspect-ratio: 1;
   display: flex;
@@ -218,6 +226,10 @@ td {
   font-size: 1rem;
 }
 
+#list-calendar-days > li {
+  border-top: 2px solid #000000;
+}
+
 .monthlyCalendar-day:hover {
   background-color: #5CBDEA;
 }
@@ -226,16 +238,16 @@ td {
   background-color: #FFFFFF !important;
 }
 
-.monthlyCalendar-day.disabled {
-  pointer-events: none;
-}
-
 .monthlyCalendar-day.selected, #btn-toggle-times.selected, #btn-toggle-days.selected, #btn-toggle-times.selected:hover, #btn-toggle-days.selected:hover, #btn-toggle-times:hover, #btn-toggle-days:hover {
   background-color: #89CFF0;
 }
 
 #btn-toggle-times, #btn-toggle-days, #btn-prev-month, #btn-next-month {
   border: none;
+}
+
+#btn-prev-month:hover, #btn-next-month:hover, #btn-prev-week:hover, #btn-next-week:hover, #btn-prev-day:hover, #btn-next-day:hover {
+  background-color: #89CFF0;
 }
 
 @media (min-width: 568px) {

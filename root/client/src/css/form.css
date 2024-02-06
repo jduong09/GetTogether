@@ -116,6 +116,7 @@ form > label:last-of-type, #div-availabilities-table, table, thead, tr {
 
 #btn-form-submit:hover {
   border-color: #89CFF0;
+  background-color: #89CFF0;
 }
 
 #div-monthlyTable > h2 {
@@ -132,16 +133,9 @@ form > label:last-of-type, #div-availabilities-table, table, thead, tr {
   margin-bottom: 1rem;
 }
 
-.week {
-  display: flex;
-}
 
 #btn-toggle-times:hover, #btn-toggle-days:hover {
   background-color: #89CFF0;
-}
-
-.week > li > h2 {
-  font-weight: 700;
 }
 
 #btn-form-submit:hover {

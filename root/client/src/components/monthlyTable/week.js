@@ -9,8 +9,8 @@ export const Week = ({ pollAvailabilities, year, month, week, handleDayClick }) 
     return (day === '' ?
       <li key={idx} className='monthlyCalendar-day disabled'></li> :
       <li key={idx} className={`${pollAvailabilities[dateISO] ? 'selected' : ''} monthlyCalendar-day ${date < todaysDate ? 'disabled' : ''}`} onClick={(e) => handleDayClick(year, month, day, e)}>
-        <h3>{convertIntToMonth(month).slice(0, 3)}</h3>
-        <h2>{day}</h2>
+        <span>{convertIntToMonth(month).slice(0, 3)}</span>
+        <span>{day}</span>
       </li>);
   }) ;
 
