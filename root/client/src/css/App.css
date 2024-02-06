@@ -45,7 +45,7 @@ h1, h2, h3, button {
 }
 
 header > h2 {
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 
 #svg-logo, #svg-description, #svg-location, #svg-edit, #svg-delete, #svg-description-expand {
@@ -131,6 +131,10 @@ button {
 }
 
 @media (min-width: 576px) {
+  header > h2 {
+    font-size: 2rem;
+  }
+
   #list-polls {
     grid-template-columns: repeat(2, 1fr);
   }
