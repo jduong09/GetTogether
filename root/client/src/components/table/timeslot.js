@@ -5,7 +5,6 @@ import { TimeBlock } from './timeblock';
 export const TimeSlot = ({ week, date, startTime, duration, setPollAvailabilities, pollAvailabilities, hour }) => {
   const [selected, setSelected] = useState(false);
   useEffect(() => {
-    // Check to see if this timeslot with date and starttime is in the poll availabilities in order to become selected.
     if (pollAvailabilities.hasOwnProperty(date)) {
       const timezoneOffset = new Date(Date.now()).getTimezoneOffset();
       const timezoneOffsetToHour = timezoneOffset / 60;

@@ -30,7 +30,6 @@ table {
   border: 0;
 }
 
-/* Table: Dates and Times */
 #table-desktop thead th, #table-desktop  tbody tr td {
   display: none;
 }
@@ -169,7 +168,6 @@ td {
   margin: 0 0 0 auto;
 }
 
-/* Table: Calendar */
 #monthlyTable-header {
   display: flex;
   align-items: flex-end;

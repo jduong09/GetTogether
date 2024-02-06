@@ -1,10 +1,8 @@
 import { React } from 'react';
-import { calculateTimeFrame } from '../../util/tablehelpers';
 
 export const TimeBlock = ({duration, startTime, classTopPosition, classHeight, handleDelete }) => {
   const [hour, minutes] = startTime.split(':');
   const twelveHourStartTime = `${hour < 12  ? `${hour === '00' ? 12 : hour}:${minutes}` : `${hour - 12 === 0 ? 12 : hour - 12}:${minutes}`}`
-  // {calculateTimeFrame(twelveHourStartTime, duration)}
   return (
     <span className={`span-time-block ${classTopPosition} ${classHeight}`}>
       <span>{twelveHourStartTime}</span>
