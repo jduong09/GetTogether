@@ -145,8 +145,8 @@ router.post('/:pollUuid/response', async (req, res) => {
 router.post('/email', async (req, res) => {
   const { email, pollId } = req.body;
 
-  let sharedLink = NODE_ENV === 'production' ? `https://gettogether.onrender.com/polls/${pollId}` : `http://localhost:3000/polls/${pollId}`;
-  let adminLink = NODE_ENV === 'production' ? `https://gettogether.onrender.com/admin/${pollId}` : `http://localhost:3000/admin/${pollId}`;
+  let sharedLink = NODE_ENV === 'PRODUCTION' ? `https://gettogether.onrender.com/polls/${pollId}` : `http://localhost:3000/polls/${pollId}`;
+  let adminLink = NODE_ENV === 'PRODUCTION' ? `https://gettogether.onrender.com/admin/${pollId}` : `http://localhost:3000/admin/${pollId}`;
 
   try {
     const message = {
