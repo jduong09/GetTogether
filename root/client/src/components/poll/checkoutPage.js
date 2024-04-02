@@ -5,6 +5,7 @@ import '../../css/checkout.css';
 export const CheckoutPage = () => {
   const { pollUuid } = useParams();
   const [pollData, setPollData] = useState(null);
+  const [email, setEmail] = useState("");
   useEffect(() => {
     const fetchPollData = async () => {
       const response = await fetch(`/polls/${pollUuid}/pollInfo`);
@@ -15,6 +16,26 @@ export const CheckoutPage = () => {
 
     fetchPollData().then(data => setPollData(data.pollData));
   }, []);
+
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+  }
+
+  const handleEmailSubmit = async (e) => {
+    e.preventDefault();
+    const response = await fetch(`/polls/email`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        email,
+        pollId: pollData.id,
+      }),
+    });
+
+    const data = response.json();
+    console.log(data);
+    return;
+  }
 
   return (
     <div>
@@ -36,6 +57,15 @@ export const CheckoutPage = () => {
             <div className='div-link'>
               Use this link to see to make changes:
               <h2><a href={`${window.location.protocol + '//' + window.location.host}/admin/${pollData.id}`} target='_blank' rel='noreferrer'>Link</a></h2>
+            </div>
+            <div>
+              <h2>Send links to email</h2>
+              <form id="form-email">
+                <label >Email:
+                  <input type="text" id="input-email" name="input-email" placeholder="foobar@gmail.com" value={email} onChange={handleEmailChange} />
+                </label>
+                <button onClick={handleEmailSubmit}>Send Email</button>
+              </form>
             </div>
           </div>}
       </main>

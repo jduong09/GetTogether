@@ -2,9 +2,26 @@ const express = require('express');
 const Poll = require('../../../db/models/poll');
 const crypto = require('crypto');
 const router = express.Router();
+const dotenv = require('dotenv');
+const nodemailer = require('nodemailer');
 
+dotenv.config();
+
+const { GMAIL_user, GMAIL_pass, NODE_ENV } = process.env;
+
+const smtpConfig = {
+  host: 'smtp.gmail.com',
+  port: 465,
+  secure: true, // use SSL
+  auth: {
+    user: GMAIL_user,
+    pass: GMAIL_pass
+  }
+};
+
+const transport = nodemailer.createTransport(smtpConfig);
 router.route('/')
-  .get(async (req, res, next) => {
+  .get(async (req, res) => {
     try {
       const polls = await Poll.find({}).then(data => {
         return data.map(poll => {
@@ -92,7 +109,7 @@ router.get('/:pollId/pollInfo', async (req, res) => {
   }
 });
 
-router.post('/:pollUuid/response', async (req, res, next) => {
+router.post('/:pollUuid/response', async (req, res) => {
   const { name, choices } = req.body;
   const userUuid = crypto.randomBytes(24).toString('hex');
 
@@ -122,6 +139,36 @@ router.post('/:pollUuid/response', async (req, res, next) => {
     res.status(200).json({ response: 'Successfully added response.', data: response });
   } catch(err) {
     res.status(400).json({ response: 'Failure to create response.' });
+  }
+});
+
+router.post('/email', async (req, res) => {
+  const { email, pollId } = req.body;
+
+  let sharedLink = NODE_ENV === 'production' ? `https://gettogether.onrender.com/polls/${pollId}` : `http://localhost:3000/polls/${pollId}`;
+  let adminLink = NODE_ENV === 'production' ? `https://gettogether.onrender.com/admin/${pollId}` : `http://localhost:3000/admin/${pollId}`;
+
+  try {
+    const message = {
+      from: `<${GMAIL_user}>`,
+      to: `<${email}>`,
+      subject: 'Checkout',
+      text: `Here are your GetTogether important links. To Share: ${sharedLink}. Link to edit: ${adminLink}`,
+    };
+
+    await transport.sendMail(message, (err) => {
+      if (err) {
+        console.log('Error Occured');
+        console.log(err.message);
+        return;
+      }
+      console.log('Message sent successfully');
+    });
+
+    res.json({ data: 'Email Successful' });
+  } catch(err) {
+    console.log(err);
+    res.json({ data: 'Error Sending Email' });
   }
 });
 
