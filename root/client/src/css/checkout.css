@@ -12,8 +12,36 @@
   font-size: 1rem;
 }
 
+#span-email-response {
+  display: block;
+  margin: 1rem 0;
+  font-weight: 700;
+}
+
+#form-email > button {
+  width: 100%;
+}
+
 @media (min-width: 767px) {
   .div-link > h2 > a {
     font-size: 2rem;
+  }
+
+  #form-email {
+    display: flex;
+    align-items: center;
+  }
+
+  #form-email > label {
+    width: 50%;
+    margin-right: 1rem;
+  }
+
+  #form-email > label > input {
+    margin-top: 0;
+  }
+
+  #form-email > button {
+    width: fit-content;
   }
 }

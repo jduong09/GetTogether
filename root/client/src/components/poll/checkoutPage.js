@@ -1,4 +1,4 @@
-import { React, useEffect, useState } from 'react';
+import { React, useEffect, useState, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import '../../css/checkout.css';
 
@@ -6,6 +6,9 @@ export const CheckoutPage = () => {
   const { pollUuid } = useParams();
   const [pollData, setPollData] = useState(null);
   const [email, setEmail] = useState("");
+  const [spanMessage, setSpanMessage] = useState("");
+  const spanEmailMessage = useRef(null);
+
   useEffect(() => {
     const fetchPollData = async () => {
       const response = await fetch(`/polls/${pollUuid}/pollInfo`);
@@ -31,9 +34,13 @@ export const CheckoutPage = () => {
         pollId: pollData.id,
       }),
     });
+    const data = await response.json();
+    data.status === 200 ? setSpanMessage('Email successfully sent!') : setSpanMessage('Error sending email.');
+    spanEmailMessage.current.classList.remove('hide');
 
-    const data = response.json();
-    console.log(data);
+    setTimeout(() => {
+      spanEmailMessage.current.classList.add('hide');
+    }, 5000);
     return;
   }
 
@@ -59,13 +66,14 @@ export const CheckoutPage = () => {
               <h2><a href={`${window.location.protocol + '//' + window.location.host}/admin/${pollData.id}`} target='_blank' rel='noreferrer'>Link</a></h2>
             </div>
             <div>
-              <h2>Send links to email</h2>
+              Send links to email
               <form id="form-email">
-                <label >Email:
+                <label htmlFor='input-email'>
                   <input type="text" id="input-email" name="input-email" placeholder="foobar@gmail.com" value={email} onChange={handleEmailChange} />
                 </label>
                 <button onClick={handleEmailSubmit}>Send Email</button>
               </form>
+              <span ref={spanEmailMessage} className='hide' id="span-email-response">{spanMessage}</span>
             </div>
           </div>}
       </main>
